@@ -1,0 +1,58 @@
+<list>
+  <org.tekkotsu.api.NodeClass>
+    <name>SoundNode</name>
+    <definition>Plays a sound then signals completion.</definition>
+    <constructor>
+      <name>SoundNodeConstructor</name>
+      <parameters>
+        <org.tekkotsu.api.Parameter>
+          <type>string</type>
+          <value>&quot;barkmed.wav&quot;</value>
+          <helpText>Enter parameter value here.</helpText>
+          <optional>true</optional>
+        </org.tekkotsu.api.Parameter>
+      </parameters>
+    </constructor>
+    <color>#0AAF53</color>
+  </org.tekkotsu.api.NodeClass>
+  <org.tekkotsu.api.NodeClass>
+    <name>StateNode</name>
+    <definition>No action. Parent for all other node classes.</definition>
+    <constructor>
+      <name>StateNodeConstructor</name>
+      <parameters/>
+    </constructor>
+    <color>#C0C0C0</color>
+  </org.tekkotsu.api.NodeClass>
+  <org.tekkotsu.api.NodeClass>
+    <name>SpeechNode</name>
+    <definition>Flashes the robot&apos;s LED&apos;s.</definition>
+    <constructor>
+      <name>SpeechNodeConstructor</name>
+      <parameters>
+        <org.tekkotsu.api.Parameter>
+          <type>string</type>
+          <value>speechnode</value>
+          <helpText>Enter parameter value here.</helpText>
+          <optional>true</optional>
+        </org.tekkotsu.api.Parameter>
+        <org.tekkotsu.api.Parameter>
+          <type>string</type>
+          <value>Hello World</value>
+          <helpText>Enter parameter value here.</helpText>
+          <optional>true</optional>
+        </org.tekkotsu.api.Parameter>
+      </parameters>
+    </constructor>
+    <color>#003DFF</color>
+  </org.tekkotsu.api.NodeClass>
+  <org.tekkotsu.api.NodeClass>
+    <name>LedNode</name>
+    <definition>New Node Class: LedNode</definition>
+    <constructor>
+      <name>LedNodeConstructor</name>
+      <parameters/>
+    </constructor>
+    <color>white</color>
+  </org.tekkotsu.api.NodeClass>
+</list>

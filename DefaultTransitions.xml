@@ -1,0 +1,45 @@
+<list>
+  <org.tekkotsu.api.TransitionClass>
+    <name>TimeoutTrans</name>
+    <definition>Fires after n miliseconds.</definition>
+    <color>#0AAF53</color>
+    <constructor>
+      <name>T</name>
+      <parameters>
+        <org.tekkotsu.api.Parameter>
+          <type>int</type>
+          <value>1000</value>
+          <helpText>Enter parameter value here.</helpText>
+          <optional>true</optional>
+        </org.tekkotsu.api.Parameter>
+      </parameters>
+    </constructor>
+  </org.tekkotsu.api.TransitionClass>
+  <org.tekkotsu.api.TransitionClass>
+    <name>CompletionTrans</name>
+    <definition>Fires when the source node&apos;s action is complete.</definition>
+    <color>#0AAF53</color>
+    <constructor>
+      <name>C</name>
+      <parameters/>
+    </constructor>
+  </org.tekkotsu.api.TransitionClass>
+  <org.tekkotsu.api.TransitionClass>
+    <name>NullTrans</name>
+    <definition>Fires immeadiately.</definition>
+    <color>#0AAF53</color>
+    <constructor>
+      <name>N</name>
+      <parameters/>
+    </constructor>
+  </org.tekkotsu.api.TransitionClass>
+  <org.tekkotsu.api.TransitionClass>
+    <name>ButtonTrans</name>
+    <definition>Fires when button clicked.</definition>
+    <color>#0AAF53</color>
+    <constructor>
+      <name>B</name>
+      <parameters/>
+    </constructor>
+  </org.tekkotsu.api.TransitionClass>
+</list>

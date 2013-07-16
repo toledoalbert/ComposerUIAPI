@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="composer.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="RCP Perspective"
+            class="composer.Perspective"
+            id="Composer.perspective">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="composer.Standards"
+            id="view.standards"
+            name="Standards"
+            restorable="true">
+      </view>
+      <view
+            class="composer.ClassView"
+            id="view.classview"
+            name="ClassView"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="*">
+         <view
+               id="view.standards"
+               minimized="false"
+               relationship="stack"
+               relative="org.eclipse.ui.editorss">
+         </view>
+         <view
+               id="view.classview"
+               minimized="false"
+               relationship="stack"
+               relative="org.eclipse.ui.editorss"
+               visible="true">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="Composer.application"
+            name="Tekkotsu State Machine Composer">
+         <property
+               name="appName"
+               value="Tekkotsu State Machine Composer">
+         </property>
+      </product>
+   </extension>
+   <extension
+         id="product1"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="Composer.application"
+            name="Tekkotsu State Machine Composer">
+         <property
+               name="appName"
+               value="Tekkotsu State Machine Composer">
+         </property>
+      </product>
+   </extension>
+
+</plugin>
