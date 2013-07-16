@@ -18,6 +18,7 @@ public class NodeClass {
 	private String color;						//Color of the node
 	private ArrayList<Method> methods;			//Methods of the class
 	private ArrayList<Variable> variables;		//Variables withing the class.
+	private ArrayList<NodeClass> subClasses;	//Node classes defined in this class.
 	
 
 	/*
@@ -41,6 +42,7 @@ public class NodeClass {
 		this.definition = "New Node Class: " + name;		//TODO default definition
 		this.parents = new ArrayList<ConstructorCall>();
 		this.methods = new ArrayList<Method>();
+		this.subClasses = new ArrayList<NodeClass>();
 	}
 	
 	//Constructor for a nodeclass that serves as a statemachine to be used as a behavior.
@@ -52,6 +54,7 @@ public class NodeClass {
 		this.definition = "New Node Class: " + name;
 		this.parents = new ArrayList<ConstructorCall>();
 		this.methods = new ArrayList<Method>();
+		this.subClasses = new ArrayList<NodeClass>();
 	}
 	
 
@@ -97,6 +100,11 @@ public class NodeClass {
 	public Method getMethod(int i){
 		return methods.get(i);
 	}
+	
+	public ArrayList<NodeClass> getSubClasses(){
+		return subClasses;
+	}
+	
 
 
 
@@ -132,6 +140,10 @@ public class NodeClass {
 	
 	public void setMethods(ArrayList<Method> methods){
 		this.methods = methods;
+	}
+	
+	public void setSubClasses(ArrayList<NodeClass> subClasses){
+		this.subClasses = subClasses;
 	}
 	
 
@@ -179,6 +191,18 @@ public class NodeClass {
 	
 	public void removeVariable(int i){
 		this.variables.remove(i);
+	}
+	
+	public void addSubClass(NodeClass subClass){
+		this.subClasses.add(subClass);
+	}
+	
+	public void removeSubClass(NodeClass subClass){
+		this.subClasses.remove(subClass);
+	}
+	
+	public void removeSubClass(int i){
+		this.subClasses.remove(i);
 	}
 	
 	//TODO return instance from a nodeclass object (just for convenience)
