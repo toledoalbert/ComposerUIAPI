@@ -19,6 +19,8 @@ public class NodeClass {
 	private ArrayList<Method> methods;			//Methods of the class
 	private ArrayList<Variable> variables;		//Variables withing the class.
 	private ArrayList<NodeClass> subClasses;	//Node classes defined in this class.
+	private String doStart;						//doStart of the nodeclass.
+	private String doStop;						//doStop method of the class.
 	
 
 	/*
@@ -43,6 +45,7 @@ public class NodeClass {
 		this.parents = new ArrayList<ConstructorCall>();
 		this.methods = new ArrayList<Method>();
 		this.subClasses = new ArrayList<NodeClass>();
+		this.doStart = null;
 	}
 	
 	//Constructor for a nodeclass that serves as a statemachine to be used as a behavior.
@@ -55,6 +58,7 @@ public class NodeClass {
 		this.parents = new ArrayList<ConstructorCall>();
 		this.methods = new ArrayList<Method>();
 		this.subClasses = new ArrayList<NodeClass>();
+		this.doStop = null;
 	}
 	
 
@@ -105,6 +109,14 @@ public class NodeClass {
 		return subClasses;
 	}
 	
+	public String getDoStart(){
+		return doStart;
+	}
+	
+	public String getDoStop(){
+		return doStop;
+	}
+	
 
 
 
@@ -144,6 +156,14 @@ public class NodeClass {
 	
 	public void setSubClasses(ArrayList<NodeClass> subClasses){
 		this.subClasses = subClasses;
+	}
+	
+	public void setDoStart(String dostart){
+		this.doStart = dostart;
+	}
+	
+	public void setDoStop(String doStop){
+		this.doStop = doStop;
 	}
 	
 
