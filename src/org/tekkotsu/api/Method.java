@@ -8,12 +8,14 @@ public class Method {
 	private String name;
 	private String body;
 	private ArrayList<Parameter> parameters;
+	private NodeClass parentClass;
 	
 	//Constructor
-	public Method (String name){
+	public Method (String name, NodeClass parentClass){
 		this.name = name;
 		body = "";
 		parameters = new ArrayList<Parameter>();
+		this.parentClass = parentClass;
 	}
 	
 	//Mutator methods
@@ -41,6 +43,10 @@ public class Method {
 		parameters.remove(index);
 	}
 	
+	public void setParentClass(NodeClass parentClass){
+		this.parentClass = parentClass;
+	}
+	
 	//Accessor methods
 	public String getName(){
 		return name;
@@ -56,6 +62,10 @@ public class Method {
 	
 	public Parameter getParameter(int i){
 		return parameters.get(i);
+	}
+	
+	public NodeClass getParentClass(){
+		return parentClass;
 	}
 	
 	

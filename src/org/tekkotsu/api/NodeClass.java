@@ -17,6 +17,7 @@ public class NodeClass {
 	private ConstructorCall constructor;		//Constructor
 	private String color;						//Color of the node
 	private ArrayList<Method> methods;			//Methods of the class
+	private ArrayList<Variable> variables;		//Variables withing the class.
 	
 
 	//Full argument constructor
@@ -165,6 +166,18 @@ public class NodeClass {
 	
 	public void removeMethod(int i){
 		this.methods.remove(i);
+	}
+	
+	public void addVariable(Variable var){
+		this.variables.add(var);
+	}
+	
+	public void removeMethod(Variable var){
+		this.variables.remove(var);
+	}
+	
+	public void removeVariable(int i){
+		this.variables.remove(i);
 	}
 	
 	//TODO return instance from a nodeclass object (just for convenience)
