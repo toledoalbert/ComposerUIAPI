@@ -8,7 +8,7 @@ public class Method {
 	private String name;
 	private String body;
 	private ArrayList<Parameter> parameters;
-	private NodeClass parentClass;
+	private NodeClass parentClass; //TODO
 	
 	//Constructor
 	public Method (String name, NodeClass parentClass){

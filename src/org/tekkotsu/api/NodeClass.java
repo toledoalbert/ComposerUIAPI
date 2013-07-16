@@ -20,6 +20,7 @@ public class NodeClass {
 	private ArrayList<Variable> variables;		//Variables withing the class.
 	
 
+	/*
 	//Full argument constructor
 	public NodeClass(String name, SetupMachine setup, ConstructorCall constructor, String color, String definition, ArrayList<ConstructorCall> parents){
 		
@@ -29,7 +30,7 @@ public class NodeClass {
 		this.color = color;
 		this.definition = definition;
 		this.parents = parents;
-	}
+	} */
 	
 	//3 Argument Constructor. Sets default values for the rest of the fields.
 	public NodeClass(String name, ConstructorCall constructor){
