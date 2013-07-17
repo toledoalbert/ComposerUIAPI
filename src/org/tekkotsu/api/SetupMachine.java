@@ -94,6 +94,8 @@ public class SetupMachine {
 		
 		//Remove transition from the transition list.
 		this.Transitions.add(transition);
+				
+		
 		
 	}
 	

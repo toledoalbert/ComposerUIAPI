@@ -204,4 +204,14 @@ public class BehaviorWriter {
 		
 	}
 	
+	//Get meat method with new more approppriate name getSetup.
+	public String getSetup(){
+		
+		//Add string to create the meat.
+		String setup = getNodes() + "\n\n" + getTransitions();
+			
+				
+		return setup;
+	}
+	
 }
