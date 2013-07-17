@@ -5,6 +5,7 @@ public class Variable {
 	//Attributes
 	private String type;
 	private String value;
+	private String name;
 	
 	//Constructor
 	public Variable(String type, String value){
@@ -21,6 +22,10 @@ public class Variable {
 		this.value = value;
 	}
 	
+	public void setName(String name){
+		this.name = name;
+	}
+	
 	//Accessor
 	public String getType(){
 		return type;
@@ -28,6 +33,10 @@ public class Variable {
 	
 	public String getValue(){
 		return value;
+	}
+	
+	public String getName(){
+		return name;
 	}
 	
 	

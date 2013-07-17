@@ -34,7 +34,7 @@ public class BehaviorWriter {
 		
 		
 		//String for class header.
-		String fsm = include + comment + getHeader() + getSetup() + registerCall;
+		String fsm = include + getHeader()+ getVariables() + getSetup() + registerCall;
 		
 		System.out.println(fsm);
 		
@@ -212,7 +212,9 @@ public class BehaviorWriter {
 	//get header method to get the class header
 	public String getHeader(){
 		
-		String classHeader = "$nodeclass " + nodeClass.getName() + " : " + "StateNode {\n\n";
+		String classHeader = comment;
+				
+		classHeader +=	"$nodeclass " + nodeClass.getName() + " : " + "StateNode {\n\n";
 		
 		return classHeader;
 		
@@ -234,6 +236,62 @@ public class BehaviorWriter {
 		setup += "\n\t}\n\n";
 				
 		return setup;
+	}
+	
+	//getVariables method to get the code of variable declarations.
+	public String getVariables(){
+		
+		//Initialize string with method and return
+		String vars = "//Variable declarations\n";
+		
+		//For each variable, make a new line and print code.
+		for(int i = 0; i < nodeClass.getVariables().size(); i++){
+			
+			//Add provide keyword.
+			vars += "$provide ";
+			
+			//Add type name
+			vars += nodeClass.getVariables().get(i).getType() + " ";
+			
+			//Add variable name
+			vars += nodeClass.getVariables().get(i).getName() + ";";
+			
+		}
+		
+		vars += "\n\n";
+		
+		return vars;
+		
+	}
+	
+	//Method to get the method declarations including dostart etc if there is.
+	public String getMethods(){
+		
+		//Initialize holding string with comment and return
+		String mets = "//Method declarations\n";
+		
+		//For each method print the code
+		for(int i = 0; i < nodeClass.getMethods().size(); i++){
+			
+			//Get the current method.
+			Method met = nodeClass.getMethods().get(i);
+			
+			//Add keyword virtual
+			mets += "virtual "; 
+			
+			//Add the returntype
+			mets += met.getReturnType() + " "; 
+			
+			//Add the name of the method and open paranthesis.
+			mets += met.getName() + "(";
+			
+			
+			
+		}
+		
+		//return the code
+		return mets;
+		
 	}
 	
 	

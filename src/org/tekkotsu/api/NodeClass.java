@@ -107,6 +107,10 @@ public class NodeClass {
 		return subClasses;
 	}
 	
+	public ArrayList<Variable> getVariables(){
+		return variables;
+	}
+	
 
 	
 
@@ -150,6 +154,10 @@ public class NodeClass {
 		this.subClasses = subClasses;
 	}
 	
+	public void setVariables(ArrayList<Variable> vars){
+		this.variables = vars;
+	}
+	
 
 
 
@@ -190,7 +198,7 @@ public class NodeClass {
 		this.variables.add(var);
 	}
 	
-	public void removeMethod(Variable var){
+	public void removeVariable(Variable var){
 		this.variables.remove(var);
 	}
 	
@@ -198,6 +206,10 @@ public class NodeClass {
 		this.variables.remove(i);
 	}
 	
+	public void removeMethod(Variable var){
+		this.variables.remove(var);
+	}
+
 	public void addSubClass(NodeClass subClass){
 		this.subClasses.add(subClass);
 	}
@@ -209,6 +221,9 @@ public class NodeClass {
 	public void removeSubClass(int i){
 		this.subClasses.remove(i);
 	}
+	
+	
+	
 	
 	//TODO return instance from a nodeclass object (just for convenience)
 	
