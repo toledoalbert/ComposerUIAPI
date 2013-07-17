@@ -15,7 +15,7 @@ public class BehaviorWriter {
 	public BehaviorWriter(NodeClass nodeClass){
 		this.nodeClass = nodeClass;
 		
-		this.registerCall = "\n\t}\n}\n\nREGISTER_BEHAVIOR(" + this.nodeClass.getName() + ");";
+		this.registerCall = "\n}\n\nREGISTER_BEHAVIOR(" + this.nodeClass.getName() + ");";
 		this.include = "#include \"Behaviors/StateMachine.h\" \n\n";
 		this.comment = "//" + nodeClass.getName() + "Behavior\n";
 		this.setup = nodeClass.getSetupMachine();
@@ -24,13 +24,17 @@ public class BehaviorWriter {
 	//Method to get the fsm content as string.
 	public String getFSM(){
 		
+		
+		//Get includes.
+		//Get header.
+		//Get Variables
+		//Get Methods.
+		//Get setupmachine
+		//Get register call
+		
+		
 		//String for class header.
-		String classHeader = "$nodeclass " + nodeClass.getName() + " : " + "StateNode {\n";
-		String setupHeader = "\t$setupmachine {\n\n";
-		
-		String meat = getMeat();
-		
-		String fsm = include + comment + classHeader + setupHeader + meat + registerCall;
+		String fsm = include + comment + getHeader() + getSetup() + registerCall;
 		
 		System.out.println(fsm);
 		
@@ -204,14 +208,33 @@ public class BehaviorWriter {
 		
 	}
 	
-	//Get meat method with new more approppriate name getSetup.
+	
+	//get header method to get the class header
+	public String getHeader(){
+		
+		String classHeader = "$nodeclass " + nodeClass.getName() + " : " + "StateNode {\n\n";
+		
+		return classHeader;
+		
+	}
+	
+	//getsetup method that calls get meat and other string to form the setupmachine block.
 	public String getSetup(){
 		
-		//Add string to create the meat.
-		String setup = getNodes() + "\n\n" + getTransitions();
-			
+		//String to store the the block.
+		String setup = "\t//Setupmachine for the behavior\n";
+		
+		//header
+		setup += "\t$setupmachine {\n\n";
+		
+		//meat
+		setup += getMeat();
+		
+		//close block
+		setup += "\n\t}\n\n";
 				
 		return setup;
 	}
+	
 	
 }
