@@ -34,7 +34,39 @@ public class BehaviorWriter {
 		
 		
 		//String for class header.
-		String fsm = include + getHeader()+ getVariables() + getSetup() + registerCall;
+		String fsm = include + getHeader();
+		
+		//If the class has any variables, get the variables.
+		if(nodeClass.getVariables().size() > 0){
+			fsm += getVariables();	
+		}
+		
+		//If there are any method declarations get the code for them
+		if(nodeClass.getMethods().size() > 0){		
+			fsm += getMethods();
+		}
+		
+		//If there are any subclasses get them and print their code.
+		if(nodeClass.getSubClasses().size() > 0){
+			
+			//For every subclass get the fsm
+			for(int i = 0; i < nodeClass.getSubClasses().size(); i++){
+				
+				//Get the fsm
+				fsm += new BehaviorWriter(nodeClass.getSubClasses().get(i)).getFSM();
+				
+			}
+			
+		}
+		
+		//if there is a setup machine get the setupmachine
+		if(nodeClass.getSetupMachine() != null){
+			fsm += getSetup();
+		}
+		
+		//Get the register call
+		fsm += registerCall;
+		
 		
 		System.out.println(fsm);
 		
@@ -285,9 +317,28 @@ public class BehaviorWriter {
 			//Add the name of the method and open paranthesis.
 			mets += met.getName() + "(";
 			
+			//for each parameter in the method print the type and name.
+			for(int j = 0; j < met.getParameters().size(); j++){
+				
+				mets += met.getParameter(j).getType() + " ";
+				mets += met.getParameter(j).getName();
+				
+				//if not the last one put a comma after
+				if(j != met.getParameters().size()-1){
+					mets += ", ";
+				}
+	
+				
+			}//End parameters
+			
+			//close the parameter open the curly braces and jump to the next line
+			mets += "){\n";
+			
+			//print the body of the method which will be edited as string in the editor.
+			mets += met.getBody() + "\n\n";
 			
 			
-		}
+		}//End single method
 		
 		//return the code
 		return mets;

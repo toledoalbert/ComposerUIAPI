@@ -6,13 +6,15 @@ public class Parameter {
 	private String value;
 	private String helpText;
 	private boolean optional;
+	private String name;
 	
 	//Constructor
-	public Parameter(String type, String value, boolean optional, String helpText){
+	public Parameter(String name, String type, String value, boolean optional, String helpText){
 		this.type = type;
 		this.value = value;
 		this.helpText = helpText;
 		this.optional = optional;
+		this.name = name;
 	}
 	
 	//Constructor for quick parameter creation.
@@ -21,6 +23,7 @@ public class Parameter {
 		this.value = value;
 		this.helpText = "Enter parameter value here.";
 		this.optional = true;
+		this.name = "var"; //TODO
 	}
 	
 
@@ -44,6 +47,10 @@ public class Parameter {
 		return optional;
 	}
 	
+	public String getName(){
+		return name;
+	}
+	
 
 
 
@@ -63,6 +70,10 @@ public class Parameter {
 	
 	public void setIfOptional(boolean optional){
 		this.optional = optional;
+	}
+	
+	public void setName(String name){
+		this.name = name;
 	}
 
 }
