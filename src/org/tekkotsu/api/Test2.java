@@ -24,6 +24,8 @@ public class Test2 {
 		node2.addMethod(met);
 		node2.addMethod(met);
 		
+		node2.addParent(new ConstructorCall("Const"));
+		
 		node2.addSubClass(node3);
 		
 		node.addSubClass(node2);

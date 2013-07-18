@@ -17,7 +17,7 @@ public class BehaviorWriter {
 		
 		this.registerCall = "\n\nREGISTER_BEHAVIOR(" + this.nodeClass.getName() + ");";
 		this.include = "#include \"Behaviors/StateMachine.h\" \n\n";
-		this.comment = "//" + nodeClass.getName() + "Behavior\n";
+		this.comment = "//" + nodeClass.getName() + " Node Class\n";
 		this.setup = nodeClass.getSetupMachine();
 	}
 	
@@ -339,7 +339,7 @@ public class BehaviorWriter {
 			mets += "){\n";
 			
 			//print the body of the method which will be edited as string in the editor.
-			mets += met.getBody() + "\n\n";
+			mets += "\n" + met.getBody() + "\n\n";
 			
 			//close method braces
 			mets += "\n\n}\n\n";
