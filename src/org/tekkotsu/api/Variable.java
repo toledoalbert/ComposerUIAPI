@@ -8,9 +8,10 @@ public class Variable {
 	private String name;
 	
 	//Constructor
-	public Variable(String type, String value){
+	public Variable(String type, String name){
 		this.type = type;
-		this.value = value;
+		this.name = name;
+		this.value = null;
 	}
 	
 	//Mutators

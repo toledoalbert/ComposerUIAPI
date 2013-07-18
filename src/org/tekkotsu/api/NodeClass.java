@@ -45,6 +45,7 @@ public class NodeClass {
 		this.parents = new ArrayList<ConstructorCall>();
 		this.methods = new ArrayList<Method>();
 		this.subClasses = new ArrayList<NodeClass>();
+		this.variables = new ArrayList<Variable>();
 	}
 	
 	//Constructor for a nodeclass that serves as a statemachine to be used as a behavior.
@@ -57,6 +58,7 @@ public class NodeClass {
 		this.parents = new ArrayList<ConstructorCall>();
 		this.methods = new ArrayList<Method>();
 		this.subClasses = new ArrayList<NodeClass>();
+		this.variables = new ArrayList<Variable>();
 	}
 	
 

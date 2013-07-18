@@ -15,26 +15,34 @@ public class BehaviorWriter {
 	public BehaviorWriter(NodeClass nodeClass){
 		this.nodeClass = nodeClass;
 		
-		this.registerCall = "\n}\n\nREGISTER_BEHAVIOR(" + this.nodeClass.getName() + ");";
+		this.registerCall = "\n\nREGISTER_BEHAVIOR(" + this.nodeClass.getName() + ");";
 		this.include = "#include \"Behaviors/StateMachine.h\" \n\n";
 		this.comment = "//" + nodeClass.getName() + "Behavior\n";
 		this.setup = nodeClass.getSetupMachine();
 	}
 	
 	//Method to get the fsm content as string.
-	public String getFSM(){
+	public String writeBehavior(){
+
+		//String for class header.
+		String fsm = include;
+
+		fsm += getClassDef();
+		
+		//Get the register call
+		fsm += registerCall;
 		
 		
-		//Get includes.
-		//Get header.
-		//Get Variables
-		//Get Methods.
-		//Get setupmachine
-		//Get register call
+		System.out.println(fsm);
 		
+		return fsm;
+	}
+	
+	//Method to get class definition code
+	public String getClassDef(){
 		
 		//String for class header.
-		String fsm = include + getHeader();
+		String fsm = getHeader();
 		
 		//If the class has any variables, get the variables.
 		if(nodeClass.getVariables().size() > 0){
@@ -53,7 +61,7 @@ public class BehaviorWriter {
 			for(int i = 0; i < nodeClass.getSubClasses().size(); i++){
 				
 				//Get the fsm
-				fsm += new BehaviorWriter(nodeClass.getSubClasses().get(i)).getFSM();
+				fsm += new BehaviorWriter(nodeClass.getSubClasses().get(i)).getClassDef();
 				
 			}
 			
@@ -64,11 +72,7 @@ public class BehaviorWriter {
 			fsm += getSetup();
 		}
 		
-		//Get the register call
-		fsm += registerCall;
-		
-		
-		System.out.println(fsm);
+		fsm += "\n\n}\n\n";
 		
 		return fsm;
 	}
@@ -336,6 +340,9 @@ public class BehaviorWriter {
 			
 			//print the body of the method which will be edited as string in the editor.
 			mets += met.getBody() + "\n\n";
+			
+			//close method braces
+			mets += "\n\n}\n\n";
 			
 			
 		}//End single method
