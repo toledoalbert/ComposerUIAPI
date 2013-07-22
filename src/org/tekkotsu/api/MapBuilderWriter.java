@@ -1,5 +1,7 @@
 package org.tekkotsu.api;
 
+import java.util.ArrayList;
+
 public class MapBuilderWriter {
 
 	//Attributes
@@ -18,7 +20,20 @@ public class MapBuilderWriter {
 	public String getCode(){
 		
 		//Header string
-		String code = "";
+		String code = "//Wizard Generated Code starts here (MapBuilder requests)";
+		
+		//List of the objects from wizard
+		ArrayList<MapRequestObject> objects = wizard.getObjects();
+		
+		//For every object make a new line and call the addObjectColor method
+		for(int i = 0; i < objects.size(); i++){
+			
+			code += "\nmapreq.addObjectColor(" + objects.get(i).getShape() + ", " + objects.get(i).getColor() + ");";
+			
+		}
+		
+		//Add comment
+		code += "\n//Wizard Generated Code ends here.";
 		
 		//Return the code string.
 		return code;
@@ -32,5 +47,14 @@ public class MapBuilderWriter {
 		
 		//Return the method dostart
 		return doStart;
+	}
+	
+	public NodeClass getNodeClass(){
+		
+		//add method to class
+		nClass.addMethod(getDoStart());
+		
+		//return the class
+		return nClass;
 	}
 }
