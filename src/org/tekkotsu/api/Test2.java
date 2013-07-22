@@ -30,6 +30,12 @@ public class Test2 {
 		
 		node.addSubClass(node2);
 
+		SetupMachine setup = new SetupMachine();
+		
+		NodeInstance inst1 = new NodeInstance(node2);
+		setup.addNode(inst1);
+		node.setSetupMachine(setup);
+		
 		
 		new BehaviorWriter(node).writeBehavior();
 		

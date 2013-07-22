@@ -27,7 +27,7 @@ public class BehaviorWriter {
 		//String for class header.
 		String fsm = include;
 
-		fsm += getClassDef();
+		fsm += getClassDef(0);
 		
 		//Get the register call
 		fsm += registerCall;
@@ -39,19 +39,25 @@ public class BehaviorWriter {
 	}
 	
 	//Method to get class definition code
-	public String getClassDef(){
+	public String getClassDef(int depth){
+		
+		String indent = "";
+		
+		for(int i = 0; i < depth; i++){
+			indent += "\t";
+		}
 		
 		//String for class header.
-		String fsm = getHeader();
+		String fsm = getHeader(depth);
 		
 		//If the class has any variables, get the variables.
 		if(nodeClass.getVariables().size() > 0){
-			fsm += getVariables();	
+			fsm += getVariables(depth);	
 		}
 		
 		//If there are any method declarations get the code for them
 		if(nodeClass.getMethods().size() > 0){		
-			fsm += getMethods();
+			fsm += getMethods(depth);
 		}
 		
 		//If there are any subclasses get them and print their code.
@@ -61,7 +67,7 @@ public class BehaviorWriter {
 			for(int i = 0; i < nodeClass.getSubClasses().size(); i++){
 				
 				//Get the fsm
-				fsm += new BehaviorWriter(nodeClass.getSubClasses().get(i)).getClassDef();
+				fsm += new BehaviorWriter(nodeClass.getSubClasses().get(i)).getClassDef(depth+1);
 				
 			}
 			
@@ -72,7 +78,7 @@ public class BehaviorWriter {
 			fsm += getSetup();
 		}
 		
-		fsm += "\n\n}\n\n";
+		fsm += "\n\n" + indent + "}\n\n";
 		
 		return fsm;
 	}
@@ -246,11 +252,17 @@ public class BehaviorWriter {
 	
 	
 	//get header method to get the class header
-	public String getHeader(){
+	public String getHeader(int depth){
 		
-		String classHeader = comment;
+		String indent = "";
+		
+		for(int i = 0; i < depth; i++){
+			indent += "\t";
+		}
+		
+		String classHeader = indent + comment;
 				
-		classHeader +=	"$nodeclass " + nodeClass.getName() + " : " + "StateNode {\n\n";
+		classHeader +=	indent + "$nodeclass " + nodeClass.getName() + " : " + "StateNode {\n\n";
 		
 		return classHeader;
 		
@@ -275,16 +287,22 @@ public class BehaviorWriter {
 	}
 	
 	//getVariables method to get the code of variable declarations.
-	public String getVariables(){
+	public String getVariables(int depth){
+		
+		String indent = "";
+		
+		for(int i = 0; i < depth+1; i++){
+			indent += "\t";
+		}
 		
 		//Initialize string with method and return
-		String vars = "//Variable declarations\n";
+		String vars = indent + "//Variable declarations\n";
 		
 		//For each variable, make a new line and print code.
 		for(int i = 0; i < nodeClass.getVariables().size(); i++){
 			
 			//Add provide keyword.
-			vars += "$provide ";
+			vars +=  indent + "$provide ";
 			
 			//Add type name
 			vars += nodeClass.getVariables().get(i).getType() + " ";
@@ -301,10 +319,16 @@ public class BehaviorWriter {
 	}
 	
 	//Method to get the method declarations including dostart etc if there is.
-	public String getMethods(){
+	public String getMethods(int depth){
+		
+		String indent = "";
+		
+		for(int i = 0; i < depth+1; i++){
+			indent += "\t";
+		}
 		
 		//Initialize holding string with comment and return
-		String mets = "//Method declarations\n";
+		String mets = indent + "//Method declarations\n";
 		
 		//For each method print the code
 		for(int i = 0; i < nodeClass.getMethods().size(); i++){
@@ -313,7 +337,7 @@ public class BehaviorWriter {
 			Method met = nodeClass.getMethods().get(i);
 			
 			//Add keyword virtual
-			mets += "virtual "; 
+			mets += indent + "virtual "; 
 			
 			//Add the returntype
 			mets += met.getReturnType() + " "; 
@@ -339,10 +363,10 @@ public class BehaviorWriter {
 			mets += "){\n";
 			
 			//print the body of the method which will be edited as string in the editor.
-			mets += "\n" + met.getBody() + "\n\n";
+			mets += "\n" + indent + met.getBody() + "\n\n";
 			
 			//close method braces
-			mets += "\n\n}\n\n";
+			mets += "\n\n" + indent + "}\n\n";
 			
 			
 		}//End single method
