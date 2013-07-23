@@ -13,14 +13,14 @@ public class MapBuilderWriter {
 	public MapBuilderWriter(MapBuilderWizard wizard){
 		this.wizard = wizard;
 		this.doStart = new Method("doStart", "void");
-		this.nClass = new NodeClass("LookForObjects", new ConstructorCall("const"));
+		this.nClass = new NodeClass(wizard.getName(), new ConstructorCall("const"));
 	}
 	
 	//
 	public String getCode(){
 		
 		//Header string
-		String code = "//Wizard Generated Code starts here (MapBuilder requests)";
+		String code = "//Wizard Generated Code starts here (MapBuilder requests)\n";
 		
 		//List of the objects from wizard
 		ArrayList<MapRequestObject> objects = wizard.getObjects();
@@ -33,7 +33,7 @@ public class MapBuilderWriter {
 		}
 		
 		//Add comment
-		code += "\n//Wizard Generated Code ends here.";
+		code += "\n\n//Wizard Generated Code ends here.";
 		
 		//Return the code string.
 		return code;
