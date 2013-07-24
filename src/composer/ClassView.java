@@ -15,7 +15,7 @@ public class ClassView extends ViewPart {
 	public void createPartControl(Composite parent) {
 		// TODO Auto-generated method stub
 		
-		Table table = new Table(parent, SWT.NONE);
+		
 
 	}
 
@@ -25,4 +25,6 @@ public class ClassView extends ViewPart {
 
 	}
 
+	
+	
 }

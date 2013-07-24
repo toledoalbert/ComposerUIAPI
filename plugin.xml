@@ -25,15 +25,9 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            class="composer.Standards"
-            id="view.standards"
-            name="Standards"
-            restorable="true">
-      </view>
-      <view
             class="composer.ClassView"
             id="view.classview"
-            name="ClassView"
+            name="Behavior"
             restorable="true">
       </view>
    </extension>
@@ -42,15 +36,11 @@
       <perspectiveExtension
             targetID="*">
          <view
-               id="view.standards"
-               minimized="false"
-               relationship="stack"
-               relative="org.eclipse.ui.editorss">
-         </view>
-         <view
+               closeable="false"
                id="view.classview"
                minimized="false"
-               relationship="stack"
+               ratio="0.95f"
+               relationship="top"
                relative="org.eclipse.ui.editorss"
                visible="true">
          </view>
@@ -58,18 +48,6 @@
    </extension>
    <extension
          id="product"
-         point="org.eclipse.core.runtime.products">
-      <product
-            application="Composer.application"
-            name="Tekkotsu State Machine Composer">
-         <property
-               name="appName"
-               value="Tekkotsu State Machine Composer">
-         </property>
-      </product>
-   </extension>
-   <extension
-         id="product1"
          point="org.eclipse.core.runtime.products">
       <product
             application="Composer.application"

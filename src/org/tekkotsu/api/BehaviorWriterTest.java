@@ -82,7 +82,7 @@ public class BehaviorWriterTest {
 		
 		System.out.println("FSM CODE: \n");
 		
-		writeBehavior.getFSM();
+		writeBehavior.writeBehavior();
 		
 	}
 

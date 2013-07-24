@@ -144,7 +144,7 @@ public class Test1 {
 		BehaviorWriter behavior = new BehaviorWriter(stateMachine);
 		
 		System.out.println("FSM Code:\n\n");
-		behavior.getFSM();
+		behavior.writeBehavior();
 		
 	}
 
