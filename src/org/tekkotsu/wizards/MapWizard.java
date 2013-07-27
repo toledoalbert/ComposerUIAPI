@@ -1,8 +1,11 @@
 package org.tekkotsu.wizards;
 
+import java.io.FileNotFoundException;
+
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.widgets.Label;
 import org.tekkotsu.api.BehaviorWriter;
+import org.tekkotsu.api.DefaultClassReader;
 import org.tekkotsu.api.NodeClass;
 
 
@@ -36,6 +39,15 @@ public class MapWizard extends Wizard {
 	//Add name to the sub classes list in the ui
 	composer.ClassView.getSubs().add(map.getName());
 	
+	/*//Write the new subclass to the xml file so in the node wizard it can show.
+	DefaultClassReader reader = null;
+	try {
+		reader = new DefaultClassReader();
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	reader.getNodes().add(map);*/
 
     return true;
   }
