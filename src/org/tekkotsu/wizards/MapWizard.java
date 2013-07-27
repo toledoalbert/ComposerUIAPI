@@ -23,8 +23,18 @@ public class MapWizard extends Wizard {
 
   @Override
   public boolean performFinish() {
-    // Print the result to the console
+	  
+    //Add the generated code to code view
 	composer.ClassView.getCodeText().setText(page.getWriter().getCode());
+	
+	//Create sub nodeclass
+	NodeClass map = page.getWriter().getNodeClass();
+	
+	//Add nodeclass to the nodeclass object of behavior as subclass
+	composer.ClassView.getNodeClass().addSubClass(map);
+	
+	//Add name to the sub classes list in the ui
+	composer.ClassView.getSubs().add(map.getName());
 	
 
     return true;

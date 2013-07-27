@@ -19,12 +19,17 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.ui.part.ViewPart;
+import org.tekkotsu.api.BehaviorWriter;
 import org.tekkotsu.api.ConstructorCall;
 import org.tekkotsu.api.NodeClass;
 import org.tekkotsu.wizards.MapWizard;
+import org.tekkotsu.wizards.NodeWizard;
 
 public class ClassView extends ViewPart {
 
+	//Data structures to store the fsm representations
+	static NodeClass behavior = new NodeClass("MyBehavior", new ConstructorCall("const"));
+	
 	//Components
 	static Label lName, lSetup, lNodes, lTrans, lSubs, lMethods, lVars, lFSM;
 	static Text name, code;
@@ -148,7 +153,7 @@ public class ClassView extends ViewPart {
 		
 		
 		
-		//Operations for the toolbar items.
+		//Operation for the mapbuilder wizard.
 		mapWizard.addSelectionListener(new SelectionAdapter(){
 					
 			@Override
@@ -165,12 +170,59 @@ public class ClassView extends ViewPart {
 					
 		});
 		
+		
+		//Operation for the new node instance wizard. from the toolbar.
+		newNode.addSelectionListener(new SelectionAdapter(){
+					
+			@Override
+			public void widgetSelected(SelectionEvent e){
+						
+				WizardDialog wizDial = new WizardDialog(parent.getShell(),new NodeWizard());
+				if(wizDial.open()==Window.OK){
+					System.out.println("Ok pressed");
+				}else{
+					System.out.println("Cancel pressed");
+				}
+						
+			}
+					
+		});
+		
+		//Operation for the fsm code generator button
+		generate.addSelectionListener(new SelectionAdapter(){
+			
+			@Override
+			public void widgetSelected(SelectionEvent e){
+					
+				//If name field is filled
+				if(!name.getText().isEmpty())
+					behavior.setName(name.getText());
+				
+				//Set the generated code views text to the recently generated code.
+				code.setText(new BehaviorWriter(behavior).writeBehavior());
+						
+			}
+					
+		});
+		
 
 	}
 	
 	//Static Methods to provide access to the components
 	public static Text getCodeText(){
 		return code;
+	}
+	
+	public static List getSubs(){
+		return subs;
+	}
+	
+	public static NodeClass getNodeClass(){
+		return behavior;
+	}
+	
+	public static List getNodesList(){
+		return nodes;
 	}
 	
 	//Method to return common gridData objects.

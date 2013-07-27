@@ -3,7 +3,7 @@
     <name>SoundNode</name>
     <definition>Plays a sound then signals completion.</definition>
     <constructor>
-      <name>SoundNodeConstructor</name>
+      <name>SoundNode</name>
       <parameters>
         <org.tekkotsu.api.Parameter>
           <type>string</type>
@@ -19,7 +19,7 @@
     <name>StateNode</name>
     <definition>No action. Parent for all other node classes.</definition>
     <constructor>
-      <name>StateNodeConstructor</name>
+      <name>StateNode</name>
       <parameters/>
     </constructor>
     <color>#C0C0C0</color>
@@ -28,7 +28,7 @@
     <name>SpeechNode</name>
     <definition>Flashes the robot&apos;s LED&apos;s.</definition>
     <constructor>
-      <name>SpeechNodeConstructor</name>
+      <name>SpeechNode</name>
       <parameters>
         <org.tekkotsu.api.Parameter>
           <type>string</type>
@@ -50,7 +50,7 @@
     <name>LedNode</name>
     <definition>New Node Class: LedNode</definition>
     <constructor>
-      <name>LedNodeConstructor</name>
+      <name>LedNode</name>
       <parameters/>
     </constructor>
     <color>white</color>

@@ -74,15 +74,6 @@ public class MapWizardPage extends WizardPage {
     aprilGrid.horizontalSpan = 3;
     april.setLayoutData(aprilGrid);
     
-    /*
-    //Composite for the object selections
-    Composite objectGroup = new Composite(container, SWT.NONE);
-    GridLayout objLayout = new GridLayout();
-    objLayout.numColumns = 4;
-    objLayout.makeColumnsEqualWidth = true;
-    objectGroup.setLayout(objLayout);
-    */
-    
     //Row four for Objects and color names
     lObjects = new Label(container, SWT.NONE); 
     lRed = new Label(container, SWT.NONE); 
