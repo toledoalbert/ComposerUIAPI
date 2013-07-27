@@ -24,13 +24,8 @@ public class MapWizard extends Wizard {
   @Override
   public boolean performFinish() {
     // Print the result to the console
-    System.out.println(page.getWriter().getCode());
-	  
-	  
-	/*  
-	NodeClass mapBuilder = page.getWriter().getNodeClass();
-    
-    System.out.println(new BehaviorWriter(mapBuilder).getClassDef(0));*/
+	composer.ClassView.getCodeText().setText(page.getWriter().getCode());
+	
 
     return true;
   }
