@@ -16,6 +16,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.ToolBar;
+import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.ui.part.ViewPart;
 import org.tekkotsu.api.ConstructorCall;
 import org.tekkotsu.api.NodeClass;
@@ -23,12 +25,16 @@ import org.tekkotsu.wizards.MapWizard;
 
 public class ClassView extends ViewPart {
 
+	//Components
+	static Text name, code;
+	static ToolBar bar;
+	static ToolItem mapWizard, newSubclass, newMethod, newNode, newTrans, newVar;
+	static List vars, nodes, trans, method, subs;
+	
 	public ClassView() {
-		// TODO Auto-generated constructor stub
+	
 	}
 
-	static Text code;
-	
 	public static Text getCodeText(){
 		return code;
 	}
@@ -36,13 +42,6 @@ public class ClassView extends ViewPart {
 	
 	@Override
 	public void createPartControl(final Composite parent) {
-		// TODO Auto-generated method stub
-		/*
-		//Components
-		Text behaviorName;
-		List varList, methodList, subList;
-		Button setupMachine;
-		*/
 		
 		//Set layout for the composite
 		GridLayout gridParent = new GridLayout();
@@ -51,24 +50,47 @@ public class ClassView extends ViewPart {
 		gridParent.numColumns = 1;
 		parent.setLayout(gridParent);
 		
+		//Create the toolbar
+		bar = new ToolBar(parent, SWT.BORDER);
+		
+		//ToolItems
+		newNode = new ToolItem(bar, SWT.PUSH);
+		newNode.setText("Node");
+		
+		newTrans = new ToolItem(bar, SWT.PUSH);
+		newTrans.setText("Transition");
+		
+		newVar = new ToolItem(bar, SWT.PUSH);
+		newVar.setText("Variable");
+		
+		newMethod = new ToolItem(bar, SWT.PUSH);
+		newMethod.setText("Method");
+		
+		newSubclass = new ToolItem(bar, SWT.PUSH);
+		newSubclass.setText("Subclass");
+		
+		mapWizard = new ToolItem(bar, SWT.PUSH);
+		mapWizard.setText("MapBuilder");
+		
+		
 		//Button to launch wizard and its operations
-				Button wizard = new Button(parent, SWT.BORDER);
-				wizard.setText("Open MapBuilder Wizard");
-				wizard.addSelectionListener(new SelectionAdapter(){
+		Button wizard = new Button(parent, SWT.BORDER);
+		wizard.setText("Open MapBuilder Wizard");
+		wizard.addSelectionListener(new SelectionAdapter(){
 					
-					@Override
-					public void widgetSelected(SelectionEvent e){
+			@Override
+			public void widgetSelected(SelectionEvent e){
 						
-						WizardDialog wizDial = new WizardDialog(parent.getShell(),new MapWizard());
-						if(wizDial.open()==Window.OK){
-							System.out.println("Ok pressed");
-						}else{
-							System.out.println("Cancel pressed");
-						}
+				WizardDialog wizDial = new WizardDialog(parent.getShell(),new MapWizard());
+				if(wizDial.open()==Window.OK){
+					System.out.println("Ok pressed");
+				}else{
+					System.out.println("Cancel pressed");
+				}
 						
-					}
+			}
 					
-				});
+		});
 		
 		code = new Text(parent, SWT.MULTI);
 		code.setText("");
