@@ -67,6 +67,10 @@ public class MapBuilderWizard {
 		this.pursueShapes = purs;
 	}
 	
+	public void setRequests(ArrayList<MapRequestObject> list){
+		this.objects = list;
+	}
+	
 	
 	//Adding and removing requests
 	public void addRequestObject(MapRequestObject obj){
