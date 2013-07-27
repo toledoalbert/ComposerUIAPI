@@ -32,6 +32,8 @@ public class MapBuilderWriter {
 			
 		}
 		
+		
+		
 		//Add comment
 		code += "\n\n//Wizard Generated Code ends here.";
 		

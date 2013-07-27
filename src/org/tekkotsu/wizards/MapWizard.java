@@ -1,6 +1,7 @@
 package org.tekkotsu.wizards;
 
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.swt.widgets.Label;
 
 
 public class MapWizard extends Wizard {
@@ -21,7 +22,7 @@ public class MapWizard extends Wizard {
   @Override
   public boolean performFinish() {
     // Print the result to the console
-    System.out.println(page.getWriter());
+    System.out.println(page.getWriter().getCode());
 
     return true;
   }
