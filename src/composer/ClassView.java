@@ -26,34 +26,33 @@ import org.tekkotsu.wizards.MapWizard;
 public class ClassView extends ViewPart {
 
 	//Components
+	static Label lName, lSetup, lNodes, lTrans, lSubs, lMethods, lVars, lFSM;
 	static Text name, code;
 	static ToolBar bar;
 	static ToolItem mapWizard, newSubclass, newMethod, newNode, newTrans, newVar;
-	static List vars, nodes, trans, method, subs;
-	
-	public ClassView() {
-	
-	}
+	static List vars, nodes, trans, methods, subs;
+	static Button generate;
 
-	public static Text getCodeText(){
-		return code;
-	}
-	
-	
 	@Override
 	public void createPartControl(final Composite parent) {
 		
 		//Set layout for the composite
 		GridLayout gridParent = new GridLayout();
 		gridParent.horizontalSpacing = 10;
-		gridParent.makeColumnsEqualWidth = true;
-		gridParent.numColumns = 1;
+		//gridParent.makeColumnsEqualWidth = true;
+		gridParent.numColumns = 5;
 		parent.setLayout(gridParent);
 		
 		//Create the toolbar
 		bar = new ToolBar(parent, SWT.BORDER);
+		bar.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 4,1));
 		
-		//ToolItems
+		lFSM = new Label(parent, SWT.NONE);
+		lFSM.setText("Generated FSM Code");
+		lFSM.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1)); 
+		
+		
+		//ToolItems ROW
 		newNode = new ToolItem(bar, SWT.PUSH);
 		newNode.setText("Node");
 		
@@ -72,11 +71,85 @@ public class ClassView extends ViewPart {
 		mapWizard = new ToolItem(bar, SWT.PUSH);
 		mapWizard.setText("MapBuilder");
 		
+		//First ROW
+		lName = new Label(parent, SWT.NONE);
+		lName.setText("Behavior Name:");
+		lName.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1)); //TODO
 		
-		//Button to launch wizard and its operations
-		Button wizard = new Button(parent, SWT.BORDER);
-		wizard.setText("Open MapBuilder Wizard");
-		wizard.addSelectionListener(new SelectionAdapter(){
+		name = new Text(parent, SWT.BORDER);
+		name.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 2,1));
+		
+		code = new Text(parent, SWT.BORDER);
+		GridData codeGrid = new GridData(SWT.FILL, SWT.FILL, true, true, 2,11);
+		codeGrid.widthHint = 500;
+		code.setLayoutData(codeGrid);
+		
+		
+		//Second ROW
+		lSetup = new Label(parent, SWT.NONE);
+		lSetup.setText("Setup Machine");
+		lSetup.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 3,1));
+		
+		//Third ROW
+		lNodes = new Label(parent, SWT.NONE);
+		lNodes.setText("Nodes");
+		lNodes.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1));
+		
+		lTrans = new Label(parent, SWT.NONE);
+		lTrans.setText("Transitions");
+		lTrans.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2,1));
+		
+		//Fourth ROW
+		nodes = new List(parent, SWT.BORDER);
+		GridData nodesGrid = new GridData(SWT.FILL, SWT.FILL, true, true, 1,3);
+		nodesGrid.heightHint = 200;
+		nodes.setLayoutData(nodesGrid);
+		
+		trans = new List(parent, SWT.BORDER);
+		GridData transGrid = new GridData(SWT.FILL, SWT.FILL, true, true, 2,3);
+		transGrid.heightHint = 200;
+		trans.setLayoutData(transGrid);
+		
+		//Fifth ROW
+		lSubs = new Label(parent, SWT.NONE);
+		lSubs.setText("Sub Classes");
+		lSubs.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1));
+		
+		lMethods = new Label(parent, SWT.NONE);
+		lMethods.setText("Methods");
+		lMethods.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1));
+		
+		lVars = new Label(parent, SWT.NONE);
+		lVars.setText("Variables");
+		lVars.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1));
+		
+		//Sixth ROW
+		subs = new List(parent, SWT.BORDER);
+		GridData subsGrid = new GridData(SWT.FILL, SWT.FILL, true, true, 1,3);
+		subsGrid.heightHint = 200;
+		subs.setLayoutData(subsGrid);
+		
+		methods = new List(parent, SWT.BORDER);
+		GridData methodsGrid = new GridData(SWT.FILL, SWT.FILL, true, true, 1,3);
+		methodsGrid.heightHint = 200;
+		methods.setLayoutData(methodsGrid);
+		
+		vars = new List(parent, SWT.BORDER);
+		GridData varsGrid = new GridData(SWT.FILL, SWT.FILL, true, true, 1,3);
+		varsGrid.heightHint = 200;
+		vars.setLayoutData(varsGrid);
+		
+		//Seventh ROW
+		generate = new Button(parent, SWT.PUSH);
+		generate.setText("Show FSM Code!");
+		generate.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL, false, false, 2,1));
+		
+		
+		
+		
+		
+		//Operations for the toolbar items.
+		mapWizard.addSelectionListener(new SelectionAdapter(){
 					
 			@Override
 			public void widgetSelected(SelectionEvent e){
@@ -92,17 +165,23 @@ public class ClassView extends ViewPart {
 					
 		});
 		
-		code = new Text(parent, SWT.MULTI);
-		code.setText("");
-		
-		GridData codeGrid = new GridData(); codeGrid.verticalSpan = 1; codeGrid.horizontalSpan = 1;
-		codeGrid.grabExcessHorizontalSpace = true; codeGrid.grabExcessVerticalSpace = true;
-		codeGrid.horizontalAlignment = SWT.FILL; codeGrid.verticalAlignment = SWT.FILL;
-		code.setLayoutData(codeGrid);
-		
-		
 
 	}
+	
+	//Static Methods to provide access to the components
+	public static Text getCodeText(){
+		return code;
+	}
+	
+	//Method to return common gridData objects.
+	public GridData spanOne(int span){
+		GridData grid = new GridData();
+		grid.horizontalSpan = span;
+		return grid;
+	}
+	
+	
+
 
 	@Override
 	public void setFocus() {

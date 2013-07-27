@@ -25,6 +25,7 @@
    <extension
          point="org.eclipse.ui.views">
       <view
+            allowMultiple="true"
             class="composer.ClassView"
             id="view.classview"
             name="Behavior"
