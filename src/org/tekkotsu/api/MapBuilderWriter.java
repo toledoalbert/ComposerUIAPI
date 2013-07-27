@@ -32,10 +32,14 @@ public class MapBuilderWriter {
 			
 		}
 		
+		//generate code for apriltag if necesarry
+		if(wizard.getAprilTag()) code += "\n\nmapreq.setAprilTagFamily();\n";
 		
+		//generate code for pursueShapes if necesarry
+		if(wizard.getPursueShapes()) code += "\nmapreq.pursueShapes = true;\n";
 		
 		//Add comment
-		code += "\n\n//Wizard Generated Code ends here.";
+		code += "\n//Wizard Generated Code ends here.";
 		
 		//Return the code string.
 		return code;
