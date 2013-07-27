@@ -1,6 +1,10 @@
 package composer;
 
+import org.eclipse.jface.window.Window;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.FontMetrics;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Rectangle;
@@ -15,6 +19,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 import org.tekkotsu.api.ConstructorCall;
 import org.tekkotsu.api.NodeClass;
+import org.tekkotsu.wizards.MapWizard;
 
 public class ClassView extends ViewPart {
 
@@ -23,7 +28,7 @@ public class ClassView extends ViewPart {
 	}
 
 	@Override
-	public void createPartControl(Composite parent) {
+	public void createPartControl(final Composite parent) {
 		// TODO Auto-generated method stub
 		
 		//Components
@@ -65,6 +70,28 @@ public class ClassView extends ViewPart {
 		gridData.heightHint = trim.height;
 		System.out.println(trim.height);
 		varList.setLayoutData(gridData);
+		
+		//Button to launch wizard and its operations
+		Button wizard = new Button(parent, SWT.BORDER);
+		wizard.setText("Open MapBuilder Wizard");
+		wizard.addSelectionListener(new SelectionAdapter(){
+			
+			@Override
+			public void widgetSelected(SelectionEvent e){
+				
+				WizardDialog wizDial = new WizardDialog(parent.getShell(),new MapWizard());
+				if(wizDial.open()==Window.OK){
+					System.out.println("Ok pressed");
+				}else{
+					System.out.println("Cancel pressed");
+				}
+				
+			}
+			
+		});
+		
+		//Textfield to put the generated code.
+		Text codeField = new Text(parent, SWT.MULTI);
 		
 		
 		
