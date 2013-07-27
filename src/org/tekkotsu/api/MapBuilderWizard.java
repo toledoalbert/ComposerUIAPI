@@ -8,14 +8,16 @@ public class MapBuilderWizard {
 	private String name;
 	private String map;
 	private boolean aprilTag;
+	private boolean pursueShapes;
 	private ArrayList<MapRequestObject> objects = new ArrayList<MapRequestObject>();
 	
 	//Constructor
-	public MapBuilderWizard(String name, String map, boolean april){
+	public MapBuilderWizard(String name, String map, boolean april, boolean pursue){
 		this.name = name;
 		this.map = map;
 		this.aprilTag = april;
 		this.objects = new ArrayList<MapRequestObject>();
+		this.pursueShapes = pursue;
 	}
 	
 	public MapBuilderWizard(){
@@ -23,6 +25,7 @@ public class MapBuilderWizard {
 		this.map = "";
 		this.aprilTag = true;
 		this.objects = new ArrayList<MapRequestObject>();
+		this.pursueShapes = false; //TODO
 	}
 	
 	//Accessor methods
@@ -42,6 +45,10 @@ public class MapBuilderWizard {
 		return objects;
 	}
 	
+	public boolean getPursueShapes(){
+		return pursueShapes;
+	}
+	
 	
 	//Mutators
 	public void setName(String name){
@@ -54,6 +61,10 @@ public class MapBuilderWizard {
 	
 	public void setAprilTag(boolean april){
 		this.aprilTag = april;
+	}
+	
+	public void setPursueShapes(boolean purs){
+		this.pursueShapes = purs;
 	}
 	
 	
