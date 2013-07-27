@@ -21,7 +21,7 @@ public class MapWizard extends Wizard {
   @Override
   public boolean performFinish() {
     // Print the result to the console
-    System.out.println(page.getText1());
+    System.out.println(page.getWriter());
 
     return true;
   }
