@@ -9,7 +9,7 @@ import org.tekkotsu.api.SetupMachine;
 
 public class TransWizard extends Wizard {
 
-  protected NodeWizardPage page;
+  protected TransWizardPage page;
 
   public TransWizard() {
     super();
@@ -18,7 +18,7 @@ public class TransWizard extends Wizard {
 
   @Override
   public void addPages() {
-    page = new NodeWizardPage();
+    page = new TransWizardPage();
     addPage(page);
   }
 

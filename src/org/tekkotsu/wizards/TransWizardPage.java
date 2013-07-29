@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 import org.tekkotsu.api.DefaultClassReader;
 import org.tekkotsu.api.MapBuilderWizard;
@@ -34,15 +35,17 @@ public class TransWizardPage extends WizardPage {
 	
 	//Components
 	private Composite container;
-	private Label lLabel, nodeClass, lParameter;
-	private Text label, parameter ;
-	private Combo nodeCombo;
+	private Label lTrans, lNodes, lParameter, lSources, lTargets;
+	private Text parameter ;
+	private Combo transCombo, nodesCombo;
+	private Button addSource, addTrans;
+	private List sources, transitions;
 	private DefaultClassReader reader;
 	
 	public TransWizardPage() {
-		super("Node Instance Wizard");
-		setTitle("New Node Instance");
-		setDescription("This wizard helps you create a new node instance for the setup machine of your behavior.");
+		super("Transition Instance Wizard");
+		setTitle("New Transition Instance");
+		setDescription("This wizard helps you create a new transition instance for the setup machine of your behavior.");
 	}
 
 	@Override
@@ -56,19 +59,16 @@ public class TransWizardPage extends WizardPage {
 	    layout.makeColumnsEqualWidth = true;	  
 	  
 	    //First row
-	    lLabel = new Label(container, SWT.NONE);
-	    lLabel.setText("Label");
-	    lLabel.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1));
+	    lTrans = new Label(container, SWT.NONE);
+	    lTrans.setText("Transitions");
+	    lTrans.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1));
 
-	    label = new Text(container, SWT.SINGLE | SWT.BORDER);
-	    label.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 1, 1));
+	    lNodes = new Label(container, SWT.NONE);
+	    lNodes.setText("Nodes");
+	    lNodes.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1));
 	    
 	    //Second Row
-	    nodeClass = new Label(container, SWT.NONE);
-	    nodeClass.setText("Node Class");
-	    nodeClass.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1));
-	    
-	    nodeCombo = new Combo(container, SWT.READ_ONLY);
+	    transCombo = new Combo(container, SWT.READ_ONLY);
 	    try {
 			reader = new DefaultClassReader();
 		} catch (FileNotFoundException e) {
@@ -77,23 +77,28 @@ public class TransWizardPage extends WizardPage {
 		}
 	
 	    for(int i = 0; i < reader.getNodes().size(); i++){
-	    	nodeCombo.add(reader.getNodes().get(i).getName());
+	    	transCombo.add(reader.getNodes().get(i).getName());
 	    	nodeMap.put(reader.getNodes().get(i).getName(), reader.getNodes().get(i));
 	    }
     
-	    nodeCombo.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 1, 1));
+	    transCombo.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 1, 1));
 	    
-	    //Third Row
-	    lParameter = new Label(container, SWT.NONE);
-	    lParameter.setText("Parameter");
-	    lParameter.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1));
-
-	    parameter = new Text(container, SWT.SINGLE | SWT.BORDER);
-	    parameter.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 1, 1));
+	    nodesCombo = new Combo(container, SWT.READ_ONLY);
+	    try {
+			reader = new DefaultClassReader();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	    for(int i = 0; i < reader.getNodes().size(); i++){
+	    	nodesCombo.add(reader.getNodes().get(i).getName());
+	    	nodeMap.put(reader.getNodes().get(i).getName(), reader.getNodes().get(i));
+	    }
+    
+	    nodesCombo.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 1, 1));
 	    
-	    lParameter.setVisible(false);
-	    parameter.setVisible(false);
-	    
+	   /*
 	    //Depending on the selected node show parameter field or not.
 	    nodeCombo.addSelectionListener(new SelectionAdapter() {
 	        public void widgetSelected(SelectionEvent e) {
@@ -112,7 +117,7 @@ public class TransWizardPage extends WizardPage {
 		        	 setPageComplete(false);
 		         }
 	        }
-	    });
+	    });*/
 	    
    
     // Required to avoid an error in the system
@@ -125,7 +130,7 @@ public class TransWizardPage extends WizardPage {
 	public NodeInstance getNode(){
 		
 		//Create instance
-		NodeInstance instance = new NodeInstance((NodeClass)nodeMap.get(nodeCombo.getText()));
+		NodeInstance instance = new NodeInstance((NodeClass)nodeMap.get(nodesCombo.getText()));
 		
 		//If there is a parameter add it to the instance
 		if(parameter.getVisible() && !parameter.getText().isEmpty())

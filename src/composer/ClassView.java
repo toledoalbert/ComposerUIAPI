@@ -24,6 +24,7 @@ import org.tekkotsu.api.ConstructorCall;
 import org.tekkotsu.api.NodeClass;
 import org.tekkotsu.wizards.MapWizard;
 import org.tekkotsu.wizards.NodeWizard;
+import org.tekkotsu.wizards.TransWizard;
 
 public class ClassView extends ViewPart {
 
@@ -187,6 +188,25 @@ public class ClassView extends ViewPart {
 			}
 					
 		});
+		
+		
+		//Operation for the new transition instance wizard. from the toolbar.
+		newTrans.addSelectionListener(new SelectionAdapter(){
+					
+			@Override
+			public void widgetSelected(SelectionEvent e){
+						
+				WizardDialog wizDial = new WizardDialog(parent.getShell(),new TransWizard());
+				if(wizDial.open()==Window.OK){
+					System.out.println("Ok pressed");
+				}else{
+					System.out.println("Cancel pressed");
+				}
+						
+			}
+					
+		});
+		
 		
 		//Operation for the fsm code generator button
 		generate.addSelectionListener(new SelectionAdapter(){
