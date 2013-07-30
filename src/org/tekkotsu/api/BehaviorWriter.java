@@ -182,7 +182,7 @@ public class BehaviorWriter {
 			ConstructorCall currentTransitionConstructor = current.getType().getConstructor();
 			
 			//Get current transition constructor name
-			transitions += "=" + currentTransitionConstructor.getName();
+			transitions += " =" + currentTransitionConstructor.getName();
 			
 			//if current transition constructor has any parameters
 			if(currentTransitionConstructor.getParameters().size() > 0){
@@ -198,7 +198,7 @@ public class BehaviorWriter {
 				transitions += ")";
 			}
 			
-			transitions += " => ";
+			transitions += "=> ";
 			
 			//if there are multiple targets
 			if(current.getNumOfTargets() > 1){
