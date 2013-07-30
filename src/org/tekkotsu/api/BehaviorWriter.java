@@ -198,7 +198,7 @@ public class BehaviorWriter {
 				transitions += ")";
 			}
 			
-			transitions += "=> ";
+			transitions += " => ";
 			
 			//if there are multiple targets
 			if(current.getNumOfTargets() > 1){
