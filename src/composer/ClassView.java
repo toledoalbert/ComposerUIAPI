@@ -1,10 +1,15 @@
 package composer;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.FontMetrics;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Rectangle;
@@ -12,6 +17,8 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DirectoryDialog;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Table;
@@ -33,7 +40,7 @@ public class ClassView extends ViewPart {
 	
 	//Components
 	static Label lName, lSetup, lNodes, lTrans, lSubs, lMethods, lVars, lFSM;
-	static Text name, code;
+	static Text name, code, fileName;
 	static ToolBar bar;
 	static ToolItem mapWizard, newSubclass, newMethod, newNode, newTrans, newVar;
 	static List vars, nodes, trans, methods, subs;
@@ -51,11 +58,11 @@ public class ClassView extends ViewPart {
 		
 		//Create the toolbar
 		bar = new ToolBar(parent, SWT.BORDER);
-		bar.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 4,1));
+		bar.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 3,1));
 		
 		lFSM = new Label(parent, SWT.NONE);
 		lFSM.setText("Generated FSM Code");
-		lFSM.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1)); 
+		lFSM.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2,1)); 
 		
 		
 		//ToolItems ROW
@@ -83,7 +90,7 @@ public class ClassView extends ViewPart {
 		lName.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1)); //TODO
 		
 		name = new Text(parent, SWT.BORDER);
-		name.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 2,1));
+		name.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false, 2,1));
 		
 		code = new Text(parent, SWT.BORDER);
 		GridData codeGrid = new GridData(SWT.FILL, SWT.FILL, true, true, 2,10);
@@ -150,9 +157,42 @@ public class ClassView extends ViewPart {
 		generate.setText("Show FSM Code!");
 		generate.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL, false, false, 3,1));
 		
-		save = new Button(parent, SWT.PUSH);
+		fileName = new Text(parent, SWT.BORDER);
+		fileName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,1));
+		fileName.setText("MyCode");
+		
+		save = new Button(parent, SWT.NONE);
 		save.setText("Save Code");
-		save.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL, false, false, 2,1));
+		save.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1));
+		String path;		
+		
+		
+		//Operation for save code button
+		save.addSelectionListener(new SelectionListener() {
+			 
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+ 
+			public void widgetSelected(SelectionEvent e) {
+				DirectoryDialog dlg = new DirectoryDialog(save.getShell(),  SWT.OPEN  );
+				dlg.setText("Save");
+				String path = dlg.open();
+				System.out.println(path);
+				if (path == null) return;
+				
+				File file = new File(path+"/"+fileName.getText()+".cc.fsm");
+				try {
+					FileWriter write = new FileWriter(file);
+					write.write(code.getText());
+					write.close();
+					
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		
 		
 		
