@@ -37,7 +37,7 @@ public class ClassView extends ViewPart {
 	static ToolBar bar;
 	static ToolItem mapWizard, newSubclass, newMethod, newNode, newTrans, newVar;
 	static List vars, nodes, trans, methods, subs;
-	static Button generate;
+	static Button generate, save;
 
 	@Override
 	public void createPartControl(final Composite parent) {
@@ -86,7 +86,7 @@ public class ClassView extends ViewPart {
 		name.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 2,1));
 		
 		code = new Text(parent, SWT.BORDER);
-		GridData codeGrid = new GridData(SWT.FILL, SWT.FILL, true, true, 2,11);
+		GridData codeGrid = new GridData(SWT.FILL, SWT.FILL, true, true, 2,10);
 		codeGrid.widthHint = 500;
 		code.setLayoutData(codeGrid);
 		
@@ -148,7 +148,11 @@ public class ClassView extends ViewPart {
 		//Seventh ROW
 		generate = new Button(parent, SWT.PUSH);
 		generate.setText("Show FSM Code!");
-		generate.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL, false, false, 2,1));
+		generate.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL, false, false, 3,1));
+		
+		save = new Button(parent, SWT.PUSH);
+		save.setText("Save Code");
+		save.setLayoutData(new GridData(SWT.BEGINNING, SWT.FILL, false, false, 2,1));
 		
 		
 		
