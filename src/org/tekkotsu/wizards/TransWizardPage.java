@@ -195,12 +195,15 @@ public class TransWizardPage extends WizardPage {
 		
 		//Set the sources
 		for(int i = 0; i < sources.getItems().length; i++){
-			instance.addSource((NodeInstance)transMap.get(sources.getItems()[i]));
+			instance.addSource((NodeInstance)nodeMap.get(sources.getItems()[i]));
 		}
+		
+		System.out.println(targets.getItems().length);
 		
 		//Set the targets
 		for(int i = 0; i < targets.getItems().length; i++){
-			instance.addSource((NodeInstance)transMap.get(sources.getItems()[i]));
+		
+			instance.addTarget((NodeInstance)nodeMap.get(targets.getItems()[i]));
 		}
 		
 		

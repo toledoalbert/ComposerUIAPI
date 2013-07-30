@@ -80,11 +80,17 @@ public class SetupMachine {
 		//Create lists to store sources and targets of the current transition to be operated.
 		ArrayList<NodeInstance> sources = transition.getSources();
 		ArrayList<NodeInstance> targets = transition.getTargets();
+
+		//System.out.println(Nodes);
+		//System.out.println(sources);
 		
-		
-		//Check every source of the transition and add the transition as outgoing.
+		//Check every source of the transition and add the transition as outgoing. TODO
 		for(int i = 0; i < sources.size(); i++ ){
-			Nodes.get(Nodes.indexOf(sources.get(i))).addOutTrans(transition);
+			//System.out.println(i);
+			int n = Nodes.indexOf(sources.get(i));
+			//System.out.println(n);
+			NodeInstance nn = Nodes.get(n);
+			nn.addOutTrans(transition);
 		}
 		
 		//Check every target of the transition and the transition as incoming.
