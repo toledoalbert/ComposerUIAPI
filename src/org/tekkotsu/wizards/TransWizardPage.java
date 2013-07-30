@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
+import org.tekkotsu.api.BehaviorWriter;
 import org.tekkotsu.api.DefaultClassReader;
 import org.tekkotsu.api.MapBuilderWizard;
 import org.tekkotsu.api.MapBuilderWriter;
@@ -27,19 +28,22 @@ import org.tekkotsu.api.MapRequestObject;
 import org.tekkotsu.api.NodeClass;
 import org.tekkotsu.api.NodeInstance;
 import org.tekkotsu.api.Parameter;
+import org.tekkotsu.api.TransitionClass;
+import org.tekkotsu.api.TransitionInstance;
 
 public class TransWizardPage extends WizardPage {
 
 	//Data structures
-	Map nodeMap = new HashMap<String, NodeClass>();
+	Map nodeMap = new HashMap<String, NodeInstance>();
+	Map transMap = new HashMap<String, TransitionClass>();
 	
 	//Components
 	private Composite container;
 	private Label lTrans, lNodes, lParameter, lSources, lTargets;
 	private Text parameter ;
 	private Combo transCombo, nodesCombo;
-	private Button addSource, addTrans;
-	private List sources, transitions;
+	private Button addSource, addTarget;
+	private List sources, targets;
 	private DefaultClassReader reader;
 	
 	public TransWizardPage() {
@@ -76,9 +80,9 @@ public class TransWizardPage extends WizardPage {
 			e.printStackTrace();
 		}
 	
-	    for(int i = 0; i < reader.getNodes().size(); i++){
-	    	transCombo.add(reader.getNodes().get(i).getName());
-	    	nodeMap.put(reader.getNodes().get(i).getName(), reader.getNodes().get(i));
+	    for(int i = 0; i < reader.getTransitions().size(); i++){
+	    	transCombo.add(reader.getTransitions().get(i).getName());
+	    	transMap.put(reader.getTransitions().get(i).getName(), reader.getTransitions().get(i));
 	    }
     
 	    transCombo.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 1, 1));
@@ -90,34 +94,87 @@ public class TransWizardPage extends WizardPage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	    
+	    ArrayList<NodeInstance> nInstances = composer.ClassView.getNodeClass().getSetupMachine().getNodes();
 	
-	    for(int i = 0; i < reader.getNodes().size(); i++){
-	    	nodesCombo.add(reader.getNodes().get(i).getName());
-	    	nodeMap.put(reader.getNodes().get(i).getName(), reader.getNodes().get(i));
+	    for(int i = 0; i < nInstances.size(); i++){
+	    	nodesCombo.add(nInstances.get(i).getLabel());
+	    	nodeMap.put(nInstances.get(i).getLabel(), nInstances.get(i));
 	    }
     
 	    nodesCombo.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false, 1, 1));
 	    
-	   /*
-	    //Depending on the selected node show parameter field or not.
-	    nodeCombo.addSelectionListener(new SelectionAdapter() {
-	        public void widgetSelected(SelectionEvent e) {
-	            if (nodeCombo.getText().equals("SoundNode") | nodeCombo.getText().equals("SpeechNode")) {
-	              lParameter.setVisible(true);
-	              parameter.setVisible(true);
-	            }else{
-	            	lParameter.setVisible(false);
-	            	parameter.setVisible(false);
-	            }
-	            
-	            if (!label.getText().isEmpty() && ((parameter.getVisible() 
-		        		  && !parameter.getText().isEmpty()) | (!parameter.getVisible()))){
-		        	  setPageComplete(true);
-		         }else{
-		        	 setPageComplete(false);
-		         }
-	        }
-	    });*/
+	    //Third Row
+	    lParameter = new Label(container, SWT.NONE);
+	    lParameter.setText("Parameter");
+	    lParameter.setLayoutData(new GridData(SWT.BEGINNING, SWT.BOTTOM, false, false, 1,1));
+	    
+	    addSource = new Button(container, SWT.PUSH);
+	    addSource.setText("ADD Source");
+	    addSource.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1));
+	    
+	    //Fourth Row
+	    parameter = new Text(container, SWT.BORDER);
+	    parameter.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1));
+	    
+	    addTarget = new Button(container, SWT.PUSH);
+	    addTarget.setText("ADD Target");
+	    addTarget.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1));
+	    
+	    //Fifth row
+	    lSources = new Label(container, SWT.NONE);
+	    lSources.setText("Sources");
+	    lSources.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1));
+
+	    lTargets = new Label(container, SWT.BORDER);
+	    lTargets.setText("Targets");
+	    lTargets.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1));
+
+	    //Sixth Row
+	    sources = new List(container, SWT.BORDER);
+	    sources.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1,1));
+	    
+	    targets = new List(container, SWT.BORDER);
+	    targets.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1,1));
+	    
+		//Operation for the add source button.
+		addSource.addSelectionListener(new SelectionAdapter(){
+			
+			@Override
+			public void widgetSelected(SelectionEvent e){
+					
+				if(!nodesCombo.getText().isEmpty()){
+					sources.add(nodesCombo.getText());
+				}
+				
+				//set the finish button active if there is a source and a target
+				if(sources.getItems().length > 0 && targets.getItems().length > 0){
+					setPageComplete(true);
+				}
+						
+			}
+					
+		});	    
+		
+		//Operation for the add target button.
+		addTarget.addSelectionListener(new SelectionAdapter(){
+			
+			@Override
+			public void widgetSelected(SelectionEvent e){
+					
+				if(!nodesCombo.getText().isEmpty()){
+					targets.add(nodesCombo.getText());
+				}
+				
+				//set the finish button active if there is a source and a target
+				if(sources.getItems().length > 0 && targets.getItems().length > 0){
+					setPageComplete(true);
+				}
+						
+			}
+					
+		});	    
+		
 	    
    
     // Required to avoid an error in the system
@@ -127,14 +184,24 @@ public class TransWizardPage extends WizardPage {
 	}
 	
 	//Methods to return results
-	public NodeInstance getNode(){
+	public TransitionInstance getTransition(){
 		
 		//Create instance
-		NodeInstance instance = new NodeInstance((NodeClass)nodeMap.get(nodesCombo.getText()));
+		TransitionInstance instance = new TransitionInstance((TransitionClass)transMap.get(transCombo.getText()));
 		
 		//If there is a parameter add it to the instance
 		if(parameter.getVisible() && !parameter.getText().isEmpty())
 			instance.getParameters().get(0).setValue(parameter.getText()); //TODO
+		
+		//Set the sources
+		for(int i = 0; i < sources.getItems().length; i++){
+			instance.addSource((NodeInstance)transMap.get(sources.getItems()[i]));
+		}
+		
+		//Set the targets
+		for(int i = 0; i < targets.getItems().length; i++){
+			instance.addSource((NodeInstance)transMap.get(sources.getItems()[i]));
+		}
 		
 		
 		return instance;

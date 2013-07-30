@@ -104,7 +104,7 @@ public class BehaviorWriter {
 			NodeInstance current = nodeList.get(i);
 			
 			//Print its label: constructorname
-			nodes += "\t\t" + current.getLabel() + ": " + current.getType().getConstructor().getName();
+			nodes += "\n\t\t" + current.getLabel() + ": " + current.getType().getConstructor().getName();
 			
 			//if any parameters
 			if(current.getNumOfParameters() > 0){

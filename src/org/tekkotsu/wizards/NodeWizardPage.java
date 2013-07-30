@@ -126,6 +126,7 @@ public class NodeWizardPage extends WizardPage {
 		
 		//Create instance
 		NodeInstance instance = new NodeInstance((NodeClass)nodeMap.get(nodeCombo.getText()));
+		instance.setLabel(label.getText());
 		
 		//If there is a parameter add it to the instance
 		if(parameter.getVisible() && !parameter.getText().isEmpty())

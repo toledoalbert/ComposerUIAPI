@@ -245,6 +245,10 @@ public class ClassView extends ViewPart {
 		return nodes;
 	}
 	
+	public static List getTransList(){
+		return trans;
+	}
+	
 	//Method to return common gridData objects.
 	public GridData spanOne(int span){
 		GridData grid = new GridData();
