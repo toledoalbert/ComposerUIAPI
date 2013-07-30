@@ -177,7 +177,7 @@ public class BehaviorWriter {
 			}else{
 				
 				//print label of the source
-				transitions += current.getSources().get(0).getLabel() + " ";
+				transitions += current.getSources().get(0).getLabel();
 				
 			}
 			
