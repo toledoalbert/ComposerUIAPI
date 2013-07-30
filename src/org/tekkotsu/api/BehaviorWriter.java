@@ -164,7 +164,7 @@ public class BehaviorWriter {
 				//for every source
 				for(int j = 0; j < current.getNumOfSources(); j++){
 					
-					transitions += sources.get(j).getLabel() + " ";
+					transitions += sources.get(j).getLabel();
 					
 					if(j != current.getNumOfSources()-1){
 						transitions += ", ";
