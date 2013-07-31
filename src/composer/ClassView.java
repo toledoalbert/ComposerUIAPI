@@ -62,7 +62,7 @@ public class ClassView extends ViewPart {
 		
 		lFSM = new Label(parent, SWT.NONE);
 		lFSM.setText("Generated FSM Code");
-		lFSM.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2,1)); 
+		lFSM.setLayoutData(new GridData(SWT.BEGINNING, SWT.BOTTOM, false, false, 2,1)); 
 		
 		
 		//ToolItems ROW
@@ -167,6 +167,9 @@ public class ClassView extends ViewPart {
 		String path;		
 		
 		
+		
+		
+		
 		//Operation for save code button
 		save.addSelectionListener(new SelectionListener() {
 			 
@@ -259,8 +262,10 @@ public class ClassView extends ViewPart {
 			public void widgetSelected(SelectionEvent e){
 					
 				//If name field is filled
-				if(!name.getText().isEmpty())
+				if(!name.getText().isEmpty()){
 					behavior.setName(name.getText());
+					fileName.setText(name.getText());
+				}
 				
 				//Set the generated code views text to the recently generated code.
 				code.setText(new BehaviorWriter(behavior).writeBehavior());
