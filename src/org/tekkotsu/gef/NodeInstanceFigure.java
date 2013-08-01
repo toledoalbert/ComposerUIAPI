@@ -39,7 +39,7 @@ public class NodeInstanceFigure extends Figure{
 	
 	//Mutator methods
 	public void setLayout(Rectangle rect){
-		setBounds(rect);
+		getParent().setConstraint(this, rect);
 	}
 	
 	public void setLabelText(String labelText){
