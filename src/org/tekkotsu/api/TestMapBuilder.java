@@ -9,7 +9,7 @@ public class TestMapBuilder {
 		
 		MapRequestObject obj1 = new MapRequestObject("blobDataType", "red");
 		
-		MapBuilderWizard wiz = new MapBuilderWizard("LookForObjects", "localMap", true);
+		MapBuilderWizard wiz = new MapBuilderWizard("LookForObjects", "localMap", true, true);
 		
 		wiz.addRequestObject(obj1);
 		

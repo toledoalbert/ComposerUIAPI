@@ -5,7 +5,9 @@ Bundle-SymbolicName: Composer; singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: composer.Activator
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.gef;bundle-version="3.7.2",
+ org.eclipse.gef.source;bundle-version="3.7.2"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ClassPath: xstream/xstream-1.4.4.jar,
