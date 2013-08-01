@@ -48,7 +48,7 @@ public class ClassView extends ViewPart {
 	static ToolBar bar;
 	static ToolItem mapWizard, newSubclass, newMethod, newNode, newTrans, newVar;
 	static List vars, nodes, trans, methods, subs;
-	static Button generate, save;
+	static Button generate, save, editSetup;
 
 	@Override
 	public void createPartControl(final Composite parent) {
@@ -105,7 +105,11 @@ public class ClassView extends ViewPart {
 		//Second ROW
 		lSetup = new Label(parent, SWT.NONE);
 		lSetup.setText("Setup Machine");
-		lSetup.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 3,1));
+		lSetup.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1,1));
+		
+		editSetup = new Button(parent, SWT.PUSH);
+		editSetup.setText("Edit");
+		editSetup.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2,1));
 		
 		//Third ROW
 		lNodes = new Label(parent, SWT.NONE);
@@ -171,7 +175,28 @@ public class ClassView extends ViewPart {
 		String path;		
 		
 		
-		
+		//Operation for save code button
+		editSetup.addSelectionListener(new SelectionListener() {
+			 
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+ 
+			public void widgetSelected(SelectionEvent e) {
+				
+				//Get the page object
+				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+
+				//Try opening the editor with the editor input.
+				try {
+					page.openEditor(new StateMachineEditorInput("StateMachine"), "editor.statemachineeditor", false);
+					page.setEditorAreaVisible(true);
+				} catch (PartInitException ee) {
+					// TODO Auto-generated catch block
+					ee.printStackTrace();
+				}
+				
+			}
+		});		
 		
 		
 		//Operation for save code button
@@ -202,9 +227,7 @@ public class ClassView extends ViewPart {
 		});
 		
 		
-		
-		
-		
+
 		//Operation for the mapbuilder wizard.
 		mapWizard.addSelectionListener(new SelectionAdapter(){
 					
@@ -273,20 +296,6 @@ public class ClassView extends ViewPart {
 				
 				//Set the generated code views text to the recently generated code.
 				code.setText(new BehaviorWriter(behavior).writeBehavior());
-				
-				
-				//Get the page object
-				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-				
-				//Try opening the editpr with the editor input.
-				try {
-					page.openEditor(new StateMachineEditorInput("StateMachine"), "editor.statemachineeditor", false);
-				} catch (PartInitException ee) {
-					// TODO Auto-generated catch block
-					ee.printStackTrace();
-				}
-				
-						
 			}
 					
 		});

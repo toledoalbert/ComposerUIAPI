@@ -1,9 +1,17 @@
-package org.tekkotsu.api;
+package tests;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import org.tekkotsu.api.BehaviorWriter;
+import org.tekkotsu.api.DefaultClassReader;
+import org.tekkotsu.api.NodeClass;
+import org.tekkotsu.api.NodeInstance;
+import org.tekkotsu.api.SetupMachine;
+import org.tekkotsu.api.TransitionClass;
+import org.tekkotsu.api.TransitionInstance;
 
 public class Test1 {
 

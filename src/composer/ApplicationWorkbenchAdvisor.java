@@ -39,13 +39,8 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 		//Get the page object
 		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 		
-		//Try opening the editpr with the editor input.
-		try {
-			page.openEditor(new StateMachineEditorInput("StateMachine"), "editor.statemachineeditor", false);
-		} catch (PartInitException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//Hide the state machine editor
+		page.setEditorAreaVisible(false);
 		
 	}
 	

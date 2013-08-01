@@ -1,4 +1,9 @@
-package org.tekkotsu.api;
+package tests;
+
+import org.tekkotsu.api.BehaviorWriter;
+import org.tekkotsu.api.MapBuilderWizard;
+import org.tekkotsu.api.MapBuilderWriter;
+import org.tekkotsu.api.MapRequestObject;
 
 public class TestMapBuilder {
 

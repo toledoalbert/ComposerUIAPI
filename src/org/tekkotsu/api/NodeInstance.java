@@ -2,7 +2,7 @@ package org.tekkotsu.api;
 
 import java.util.ArrayList;
 
-public class NodeInstance {
+public class NodeInstance extends Graphical{
 	
 	//Attributes
 	private NodeClass type;
@@ -16,6 +16,7 @@ public class NodeInstance {
 	//Full argument Constructor
 	public NodeInstance(NodeClass type, String label, ArrayList<Parameter> parameters, ArrayList<TransitionInstance> outTrans, ArrayList<TransitionInstance> inTrans){
 
+		super();
 		this.type = type;
 		this.label = label;
 		this.parameters = parameters;
@@ -27,6 +28,7 @@ public class NodeInstance {
 	//Instance from type (nodeclass) constructor
 	public NodeInstance(NodeClass type){
 		
+		super();
 		this.type = type;
 		this.label = type.getName().toLowerCase();
 		this.parameters = type.getParameters();

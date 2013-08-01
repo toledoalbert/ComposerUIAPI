@@ -1,9 +1,13 @@
-package org.tekkotsu.api;
+package tests;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import org.tekkotsu.api.ConstructorCall;
+import org.tekkotsu.api.NodeClass;
+import org.tekkotsu.api.Parameter;
 
 import com.thoughtworks.xstream.*;
 import com.thoughtworks.xstream.io.xml.DomDriver;

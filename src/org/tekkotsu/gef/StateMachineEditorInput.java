@@ -8,15 +8,18 @@ public class StateMachineEditorInput implements IEditorInput {
 	
 	public String name = null;
 	
+	//Constructor setting the name
 	public StateMachineEditorInput(String name) {
 		this.name = name;
 	}
 
 	@Override
+	//method to check if it exists
 	public boolean exists() {
 		return (this.name != null);
 	}
 	
+	//classic equals method
 	public boolean equals(Object o) {
 		if (!(o instanceof StateMachineEditorInput))
 			return false;
@@ -29,6 +32,7 @@ public class StateMachineEditorInput implements IEditorInput {
 	}
 
 	@Override
+	//Method to get name
 	public String getName() {
 		return this.name;
 	}

@@ -40,21 +40,21 @@ public class Node extends AbstractModel {
 	
 	
 	//List of connections
-	  private List<Connection> sourceConnectionss;
-	  private List<Connection> targetConnectionss;
+	private List<Connection> sourceConnectionss;
+	private List<Connection> targetConnectionss;
 	 
-	 //Constants for Source and Target Connections
-	 public static final String SOURCE_CONNECTION = "SourceConnectionAdded";
-	 public static final String TARGET_CONNECTION = "TargetConnectionAdded";
+	//Constants for Source and Target Connections
+	public static final String SOURCE_CONNECTION = "SourceConnectionAdded";
+	public static final String TARGET_CONNECTION = "TargetConnectionAdded";
 	  
-	 //Other source connection
-	 public static final String P_SOURCE_CONNECTION = "_source_connection";
+	//Other source connection
+	public static final String P_SOURCE_CONNECTION = "_source_connection";
 
-	    public static final String P_TARGET_CONNECTION = "_target_connection";
-	    public static final String P_CONSTRAINT = "_constraint";
+	public static final String P_TARGET_CONNECTION = "_target_connection";
+	public static final String P_CONSTRAINT = "_constraint";
 	
 	//Constant for Label
-	   public static final String P_LABEL = "_label";
+	public static final String P_LABEL = "_label";
 	
 	//Activate events when GEditor properties are changed
 	private PropertyChangeSupport listeners;
@@ -62,186 +62,190 @@ public class Node extends AbstractModel {
 	//Used for updating the layout when things are moved
 	public static final String PROPERTY_LAYOUT = "NodeLayout";
 
-//Parameters	
-private String id = "State";
-private String label = "State";
-private String name;
-private Rectangle layout;
-//Abstract Model
-private List<AbstractModel> children;
-private Node parent;
-private SourceObjectModel source;
-protected int stateID; 
+	//Parameters	
+	private String id = "State";
+	private String label = "State";
+	private String name;
+	private Rectangle layout;
+	
+	//Abstract Model
+	private List<AbstractModel> children;
+	private Node parent;
+	private SourceObjectModel source;
+	protected int stateID; 
 
-//Layout data parent
-protected tgef.LayoutData parent2;
+	//Layout data parent
+	protected tgef.LayoutData parent2;
 
-private Rectangle constraint;
+	private Rectangle constraint;
 
-//for property sheets
-private IPropertySource propertySource = null;
-
-
-//Used for adding and deleting nodes
-public static final String PROPERTY_ADD = "NodeAddChild";
-public static final String PROPERTY_REMOVE = "NodeRemoveChild";
-//Taken froms Storyboard activate and deactivate
-public static final String P_ACTIVATE = "_state_activate";
-public static final String P_DEACTIVATE = "_state_deactivate";
-//used for renaming
-public static final String PROPERTY_RENAME = "NodeRename";
-
-//used for color editing *test
-//public static final String PROPERTY_COLOR = "NodeChangeColor";
-
-public static final String P_COLOR = "_color";
-
-public Node(){
-super();
-
-this.name = "Unknown";
-this.layout = new Rectangle(10, 10, 100, 100);
-this.children = new ArrayList<AbstractModel>();
-this.parent = null;
-this.listeners = new PropertyChangeSupport(this);
-this.sourceConnections = new ArrayList();
-this.targetConnections = new ArrayList();
-
-}
-//Property Change Listener
-public void addPropertyChangeListener(PropertyChangeListener listener) {
-listeners.addPropertyChangeListener(listener);
-}
-
-public PropertyChangeSupport getListeners() {
-return listeners;
-}
-public void removePropertyChangeListener(PropertyChangeListener listener) {
-listeners.removePropertyChangeListener(listener);
-}
-
-//New parent methods
-public void setParent2(tgef.LayoutData layoutData)
-{
-	this.parent2 = layoutData;
-}
+	//for property sheets
+	private IPropertySource propertySource = null;
 
 
-//Do post add method---Implemented from Storyboard
-public void doPostAdd()
-{
-    LayoutData parent = (LayoutData) getParent2();
-    List<AbstractModel> children = new ArrayList<AbstractModel>();//(parent.getPartChildren())
-    Iterator<AbstractModel> iter = children.iterator();
-    while (iter.hasNext())
-    {
-        AbstractModel model = iter.next();
-        if (model instanceof MultiTransitionModel)
-        {
-            ((MultiTransitionModel) model).doPostAdd();
-        }
-    }
-}
+	//Used for adding and deleting nodes
+	public static final String PROPERTY_ADD = "NodeAddChild";
+	public static final String PROPERTY_REMOVE = "NodeRemoveChild";
+	
+	//Taken froms Storyboard activate and deactivate
+	public static final String P_ACTIVATE = "_state_activate";
+	public static final String P_DEACTIVATE = "_state_deactivate";
+	
+	//used for renaming
+	public static final String PROPERTY_RENAME = "NodeRename";
+
+	//used for color editing *test
+	//public static final String PROPERTY_COLOR = "NodeChangeColor";
+
+	public static final String P_COLOR = "_color";
+
+	public Node(){
+		super();
+
+		this.name = "Unknown";
+		this.layout = new Rectangle(10, 10, 100, 100);
+		this.children = new ArrayList<AbstractModel>();
+		this.parent = null;
+		this.listeners = new PropertyChangeSupport(this);
+		this.sourceConnections = new ArrayList();
+		this.targetConnections = new ArrayList();
+	}
+	
+	//Property Change Listener
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		listeners.addPropertyChangeListener(listener);
+	}
+
+	public PropertyChangeSupport getListeners() {
+		return listeners;
+	}
+
+	public void removePropertyChangeListener(PropertyChangeListener listener) {
+		listeners.removePropertyChangeListener(listener);
+	}
+
+	//New parent methods
+	public void setParent2(tgef.LayoutData layoutData)
+	{
+		this.parent2 = layoutData;
+	}
 
 
-//Constraint
-public Rectangle getConstraint()
-{
-    return constraint;
-}
-
-public void setName(String name) {
-	String oldName = this.name;
-	this.name = name;
-	getListeners().firePropertyChange(PROPERTY_RENAME, oldName, this.name);
-
-}
-
-public String getName() {
-return this.name;
-}
-
-//Set shape method--not functional yet
-public void setShape(String shape)
-{
-    // verify shape style
-    if (!shape.equals(shapeValues[shapeIndex]))
-    {
-        for (int i = 0; i < shapeValues.length; i++)
-            if (shapeValues[i].equals(shape))
-            {
-                shapeIndex = i;
-                break;
-            }
-    }
-    if (!shape.equals(shapeValues[shapeIndex])) return;
-
-    this.shape = shape;
-    props.firePropertyChange(P_SHAPE, null, shape);
-}
-
-public void setShapeIndex(int index)
-{
-    shapeIndex = index;
-    setShape(shapeValues[index]);
-}
+	//Do post add method---Implemented from Storyboard
+	public void doPostAdd()
+	{
+		LayoutData parent = (LayoutData) getParent2();
+		List<AbstractModel> children = new ArrayList<AbstractModel>();//(parent.getPartChildren())
+		Iterator<AbstractModel> iter = children.iterator();
+		
+		while (iter.hasNext())
+		{
+			AbstractModel model = iter.next();
+			if (model instanceof MultiTransitionModel)
+			{
+				((MultiTransitionModel) model).doPostAdd();
+			}
+		}
+	}
 
 
-public void setLayout(Rectangle newLayout) {
-	Rectangle oldLayout = this.layout;
-	this.layout = newLayout;
-	getListeners().firePropertyChange(PROPERTY_LAYOUT, oldLayout, newLayout);
+	//Constraint
+	public Rectangle getConstraint()
+	{
+		return constraint;
+	}
 
-}
+	public void setName(String name) {
+		String oldName = this.name;
+		this.name = name;
+		getListeners().firePropertyChange(PROPERTY_RENAME, oldName, this.name);
 
-public Rectangle getLayout() {
-return this.layout;
-}
+	}
 
-//Get shape
-public String getShape()
-{
-    return shape;
-}
+	public String getName() {
+		return this.name;
+	}
 
+	//Set shape method--not functional yet
+	public void setShape(String shape)
+	{
+		// verify shape style
+		if (!shape.equals(shapeValues[shapeIndex]))
+		{
+			for (int i = 0; i < shapeValues.length; i++)
+				if (shapeValues[i].equals(shape))
+				{
+					shapeIndex = i;
+					break;
+				}
+		}
+		if (!shape.equals(shapeValues[shapeIndex])) return;
 
-//Add child method also handles addition of new child created by user
-public boolean addChild(Node child) {
-boolean b = this.children.add(child);
-if (b) {
-child.setParent(this);
-getListeners().firePropertyChange(PROPERTY_ADD, null, child);
-}
-return b;
-}
+		this.shape = shape;
+		props.firePropertyChange(P_SHAPE, null, shape);
+	}
 
-//Handles if child is deleted
-public boolean removeChild(Node child) {
-boolean b = this.children.remove(child);
-if (b)
-getListeners().firePropertyChange(PROPERTY_REMOVE, child, null);
-return b;
-}
-
-public List<AbstractModel> getChildrenArray() {
-return this.children;
-}
-
-public void setParent(Node parent) {
-this.parent = parent;
-}
-
-public Node getParent() {
-return this.parent;
-}
+	public void setShapeIndex(int index)
+	{
+		shapeIndex = index;
+		setShape(shapeValues[index]);
+	}
 
 
+	public void setLayout(Rectangle newLayout) {
+		Rectangle oldLayout = this.layout;
+		this.layout = newLayout;
+		getListeners().firePropertyChange(PROPERTY_LAYOUT, oldLayout, newLayout);
+	}
 
-//Contains method used for new object creation
+	public Rectangle getLayout() {
+		return this.layout;
+	}
 
-public boolean contains(Node child) {
-return children.contains(child);
-}
+	//Get shape
+	public String getShape()
+	{
+		return shape;
+	}
+
+
+	//Add child method also handles addition of new child created by user
+	public boolean addChild(Node child) {
+		boolean b = this.children.add(child);
+		if (b) {
+			child.setParent(this);
+			getListeners().firePropertyChange(PROPERTY_ADD, null, child);
+		}
+		return b;
+	}
+
+	//Handles if child is deleted
+	public boolean removeChild(Node child) {
+		boolean b = this.children.remove(child);
+		if (b)
+			getListeners().firePropertyChange(PROPERTY_REMOVE, child, null);
+		return b;
+	}
+
+	public List<AbstractModel> getChildrenArray() {
+		return this.children;
+	}
+
+	public void setParent(Node parent) {
+		this.parent = parent;
+	}
+
+	public Node getParent() {
+		return this.parent;
+	}
+
+
+
+	//Contains method used for new object creation
+
+	public boolean contains(Node child) {
+		return children.contains(child);
+	}
 
 
 /*@Override
@@ -256,34 +260,34 @@ public Object getAdapter(Class adapter) {
 
 
 
-//Storyboard add source connection code etc
-public List<AbstractConnectionModel> getModelSourceConnections()
-{
-    return sourceConnections;
-}
+	//Storyboard add source connection code etc
+	public List<AbstractConnectionModel> getModelSourceConnections()
+	{
+		return sourceConnections;
+	}
 
-public List<AbstractConnectionModel> getModelTargetConnections()
-{
-    return targetConnections;
-}
+	public List<AbstractConnectionModel> getModelTargetConnections()
+	{
+		return targetConnections;
+	}
 
-public void addSourceConnection(AbstractConnectionModel connx)
-{
-    sourceConnections.add(connx);
-    getListeners().firePropertyChange(P_SOURCE_CONNECTION, null, null);
-}
-
-public void addTargetConnection(AbstractConnectionModel connx)
-{
-    targetConnections.add(connx);
-    getListeners().firePropertyChange(P_TARGET_CONNECTION, null, null);
-}
-
-public void removeSourceConnection(Object connx)
-{
-    sourceConnections.remove(connx);
-    getListeners().firePropertyChange(P_SOURCE_CONNECTION, null, null);
-}
+	public void addSourceConnection(AbstractConnectionModel connx)
+	{
+	    sourceConnections.add(connx);
+	    getListeners().firePropertyChange(P_SOURCE_CONNECTION, null, null);
+	}
+	
+	public void addTargetConnection(AbstractConnectionModel connx)
+	{
+	    targetConnections.add(connx);
+	    getListeners().firePropertyChange(P_TARGET_CONNECTION, null, null);
+	}
+	
+	public void removeSourceConnection(Object connx)
+	{
+	    sourceConnections.remove(connx);
+	    getListeners().firePropertyChange(P_SOURCE_CONNECTION, null, null);
+	}
 
 public void removeTargetConnection(Object connx)
 {

@@ -1,4 +1,12 @@
-package org.tekkotsu.api;
+package tests;
+
+import org.tekkotsu.api.BehaviorWriter;
+import org.tekkotsu.api.ConstructorCall;
+import org.tekkotsu.api.Method;
+import org.tekkotsu.api.NodeClass;
+import org.tekkotsu.api.NodeInstance;
+import org.tekkotsu.api.SetupMachine;
+import org.tekkotsu.api.Variable;
 
 public class Test2 {
 

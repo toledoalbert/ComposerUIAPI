@@ -1,8 +1,16 @@
-package org.tekkotsu.api;
+package tests;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import org.tekkotsu.api.BehaviorWriter;
+import org.tekkotsu.api.ConstructorCall;
+import org.tekkotsu.api.NodeClass;
+import org.tekkotsu.api.NodeInstance;
+import org.tekkotsu.api.SetupMachine;
+import org.tekkotsu.api.TransitionClass;
+import org.tekkotsu.api.TransitionInstance;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
