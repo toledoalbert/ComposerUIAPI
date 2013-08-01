@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 
 //Class Header
-public class NodeClass {
+public class NodeClass extends Graphical{
 	
 	//Attributes
 	private String name;						//Name of the node
@@ -37,6 +37,7 @@ public class NodeClass {
 	
 	//3 Argument Constructor. Sets default values for the rest of the fields.
 	public NodeClass(String name, ConstructorCall constructor){
+		super();
 		this.name = name;
 		this.setup = null;					//No setup machine by default.
 		this.constructor = constructor;
@@ -50,6 +51,7 @@ public class NodeClass {
 	
 	//Constructor for a nodeclass that serves as a statemachine to be used as a behavior.
 	public NodeClass(String name, SetupMachine setup){
+		super();
 		this.name = name;
 		this.setup = setup;
 		this.constructor = null;

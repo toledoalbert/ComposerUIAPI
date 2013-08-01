@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 
 //Class Header
-public class SetupMachine {
+public class SetupMachine extends Graphical{
 	
 
 	//Attributes
@@ -17,12 +17,14 @@ public class SetupMachine {
 
 	//Constructor
 	public SetupMachine(ArrayList<NodeInstance> Nodes, ArrayList<TransitionInstance> Transitions){
+		super();
 		this.Nodes = Nodes;
 		this.Transitions = Transitions;
 	}
 	
 	//No argument constructor to initialize empty setup machine.
 	public SetupMachine(){
+		super();
 		this.Nodes = new ArrayList<NodeInstance>();
 		this.Transitions = new ArrayList<TransitionInstance>();
 	}
