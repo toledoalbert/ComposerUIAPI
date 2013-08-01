@@ -38,7 +38,7 @@ public class NodeClass {
 	//3 Argument Constructor. Sets default values for the rest of the fields.
 	public NodeClass(String name, ConstructorCall constructor){
 		this.name = name;
-		this.setup = new SetupMachine();					//No setup machine by default.
+		this.setup = null;					//No setup machine by default.
 		this.constructor = constructor;
 		this.color = "white";								//TODO default color white.
 		this.definition = "New Node Class: " + name;		//TODO default definition

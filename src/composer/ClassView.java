@@ -25,10 +25,14 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 import org.tekkotsu.api.BehaviorWriter;
 import org.tekkotsu.api.ConstructorCall;
 import org.tekkotsu.api.NodeClass;
+import org.tekkotsu.gef.StateMachineEditorInput;
 import org.tekkotsu.wizards.MapWizard;
 import org.tekkotsu.wizards.NodeWizard;
 import org.tekkotsu.wizards.TransWizard;
@@ -269,6 +273,19 @@ public class ClassView extends ViewPart {
 				
 				//Set the generated code views text to the recently generated code.
 				code.setText(new BehaviorWriter(behavior).writeBehavior());
+				
+				
+				//Get the page object
+				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+				
+				//Try opening the editpr with the editor input.
+				try {
+					page.openEditor(new StateMachineEditorInput("StateMachine"), "editor.statemachineeditor", false);
+				} catch (PartInitException ee) {
+					// TODO Auto-generated catch block
+					ee.printStackTrace();
+				}
+				
 						
 			}
 					
