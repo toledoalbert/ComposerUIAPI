@@ -21,6 +21,12 @@
    </extension>
    <extension
          point="org.eclipse.ui.editors">
+      <editor
+            class="org.tekkotsu.gef.StateMachineEditor"
+            default="true"
+            id="editor.statemachineeditor"
+            name="StateMachineEditor">
+      </editor>
    </extension>
    <extension
          point="org.eclipse.ui.views">

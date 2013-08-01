@@ -16,6 +16,8 @@ public class StateMachineEditor extends GraphicalEditor {
 		
 	}
 
+	
+	//Must have methods to extend GraphicalEditor
 	@Override
 	protected void initializeGraphicalViewer() {
 		// TODO Auto-generated method stub
