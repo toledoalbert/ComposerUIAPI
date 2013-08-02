@@ -19,6 +19,7 @@ public class NodeClass extends Graphical{
 	private ArrayList<Method> methods;			//Methods of the class
 	private ArrayList<Variable> variables;		//Variables withing the class.
 	private ArrayList<NodeClass> subClasses;	//Node classes defined in this class.
+	private NodeClass parent;					//Parent class if this is a subclass
 
 	
 
@@ -47,6 +48,7 @@ public class NodeClass extends Graphical{
 		this.methods = new ArrayList<Method>();
 		this.subClasses = new ArrayList<NodeClass>();
 		this.variables = new ArrayList<Variable>();
+		this.parent = null;
 	}
 	
 	//Constructor for a nodeclass that serves as a statemachine to be used as a behavior.
@@ -61,6 +63,7 @@ public class NodeClass extends Graphical{
 		this.methods = new ArrayList<Method>();
 		this.subClasses = new ArrayList<NodeClass>();
 		this.variables = new ArrayList<Variable>();
+		this.parent = null;
 	}
 	
 
