@@ -103,6 +103,7 @@ abstract public class AbstractModel implements IAdaptable {
 	
 	//To change listeners
 	//Property Change Listener
+	
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		listeners.addPropertyChangeListener(listener);
 	}
