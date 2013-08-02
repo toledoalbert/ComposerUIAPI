@@ -16,6 +16,7 @@ import org.eclipse.ui.PlatformUI;
 import org.tekkotsu.api.ConstructorCall;
 import org.tekkotsu.api.NodeClass;
 import org.tekkotsu.api.NodeInstance;
+import org.tekkotsu.api.SetupMachine;
 
 public class StateMachineEditor extends GraphicalEditor {
 	
@@ -29,19 +30,7 @@ public class StateMachineEditor extends GraphicalEditor {
 		setEditDomain(new DefaultEditDomain(this));
 		
 	}
-	
-	//Method that creates the related nodeinstance object TODO
-	public NodeClass CreateBehavior(){
-		
-		NodeClass nClass = new NodeClass("NodeClass", new ConstructorCall("const"));
-		
-		NodeClass nClasss = new NodeClass("Albert", new ConstructorCall("const"));
-		nClasss.setShape(new Rectangle(30,50,250,150));
-		nClass.addSubClass(nClasss);
-		
-		return nClass;
-		
-	}
+
 	
 	//TODO
 	protected void configureGraphicalViewer(){
@@ -55,8 +44,9 @@ public class StateMachineEditor extends GraphicalEditor {
 	//TODO
 	protected void initializeGraphicalViewer() {
 		GraphicalViewer viewer = getGraphicalViewer();
-		//viewer.setContents(composer.ClassView.getNodeClass());
-		viewer.setContents(CreateBehavior());
+		viewer.setContents(composer.ClassView.getNodeClass());
+		//viewer.setContents(CreateBehavior());
+		//viewer.setContents(new SetupMachine());
 	}
 
 

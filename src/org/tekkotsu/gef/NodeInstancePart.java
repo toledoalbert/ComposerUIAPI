@@ -38,6 +38,9 @@ public class NodeInstancePart extends AbstractGraphicalEditPart {
 		fig.setLabelText(instance.getLabel());
 		//Set the type to the name of the nodeclass object in type field.
 		fig.setTypeText(instance.getType().getName());
+		
+		//Layout
+		fig.setLayout(instance.getShape());
 	}
 	
 	//Method to return children (graphical)

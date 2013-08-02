@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.tekkotsu.api.Graphical;
 import org.tekkotsu.api.NodeClass;
@@ -39,14 +40,14 @@ public class NodeClassPart extends AbstractGraphicalEditPart {
 		//Set the labeltext to the instance label
 		fig.setNameText(instance.getName());
 		
+		//Layout
+		fig.setLayout(instance.getShape());
+		
 	}
 
 	//Method to return children (graphical)
 	public List<Graphical> getModelChildren(){
-		
-		//Define initialize the list to return
-		ArrayList<Graphical> list = new ArrayList<Graphical>();
-	
+
 		//Get the model
 		NodeClass nClass = (NodeClass)getModel();
 		
@@ -55,15 +56,18 @@ public class NodeClassPart extends AbstractGraphicalEditPart {
 		
 		//Cast and add all the nodes from the list to the children list
 		for(int i = 0; i < subs.size(); i++){
-			list.add(subs.get(i));
+			int x = 200*(i+1);
+			subs.get(i).setShape(new Rectangle(x,40,150,150));
+			nClass.addChild(subs.get(i));
 		}
 		
 		//Add the setupmachine if exists to the list of children too.
 		if(nClass.getSetupMachine() != null){
-			list.add(nClass.getSetupMachine());
+			nClass.getSetupMachine().setShape(new Rectangle(25,300,1000,300));
+			nClass.addChild(nClass.getSetupMachine());
 		}
 		
-		return list;
+		return nClass.getChildren();
 
 	}	
 	

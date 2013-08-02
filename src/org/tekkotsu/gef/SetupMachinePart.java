@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.tekkotsu.api.Graphical;
 import org.tekkotsu.api.NodeInstance;
@@ -37,14 +38,14 @@ public class SetupMachinePart extends AbstractGraphicalEditPart {
 		
 		//Set the labeltext to the instance label
 		fig.setLabelText("Setup Machine");
+		
+		//Layout
+		fig.setLayout(setup.getShape());
 	}
 	
 	//Method to return children (graphical)
 	public List<Graphical> getModelChildren(){
-		
-		//Define initialize the list to return
-		ArrayList<Graphical> list = new ArrayList<Graphical>();
-	
+
 		//Get the model
 		SetupMachine setup = (SetupMachine)getModel();
 		
@@ -53,10 +54,12 @@ public class SetupMachinePart extends AbstractGraphicalEditPart {
 		
 		//Cast and add all the nodes from the list to the children list
 		for(int i = 0; i < nodes.size(); i++){
-			list.add(nodes.get(i));
+			int x = 200*(i+1);
+			nodes.get(i).setShape(new Rectangle(x,40,150,150));
+			setup.addChild(nodes.get(i));
 		}
 		
-		return list;
+		return setup.getChildren();
 
 	}
 	
