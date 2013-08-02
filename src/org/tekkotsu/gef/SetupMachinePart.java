@@ -7,15 +7,16 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.tekkotsu.api.Graphical;
 import org.tekkotsu.api.NodeInstance;
+import org.tekkotsu.api.SetupMachine;
 
-public class NodeInstancePart extends AbstractGraphicalEditPart {
+public class SetupMachinePart extends AbstractGraphicalEditPart {
 
 	@Override
 	//Method to return the figure
 	protected IFigure createFigure() {
 		
 		//initialize a new nodeinstance figure and set it to figure
-		IFigure figure = new NodeInstanceFigure();
+		IFigure figure = new SetupMachineFigure();
 		
 		//return the figure
 		return figure;
@@ -30,19 +31,33 @@ public class NodeInstancePart extends AbstractGraphicalEditPart {
 	protected void refreshVisuals(){
 		
 		//Get the figure
-		NodeInstanceFigure fig = (NodeInstanceFigure)getFigure();
+		SetupMachineFigure fig = (SetupMachineFigure)getFigure();
 		//Get the model
-		NodeInstance instance = (NodeInstance)getModel();
+		SetupMachine setup = (SetupMachine)getModel();
 		
 		//Set the labeltext to the instance label
-		fig.setLabelText(instance.getLabel());
-		//Set the type to the name of the nodeclass object in type field.
-		fig.setTypeText(instance.getType().getName());
+		fig.setLabelText("Setup Machine");
 	}
 	
 	//Method to return children (graphical)
 	public List<Graphical> getModelChildren(){
-		return new ArrayList<Graphical>();
+		
+		//Define initialize the list to return
+		ArrayList<Graphical> list = new ArrayList<Graphical>();
+	
+		//Get the model
+		SetupMachine setup = (SetupMachine)getModel();
+		
+		//Get the list of nodeinstances
+		ArrayList<NodeInstance> nodes = setup.getNodes();
+		
+		//Cast and add all the nodes from the list to the children list
+		for(int i = 0; i < nodes.size(); i++){
+			list.add(nodes.get(i));
+		}
+		
+		return list;
+
 	}
 	
 }

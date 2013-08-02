@@ -1,6 +1,7 @@
 package org.tekkotsu.gef;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.ui.parts.GraphicalEditor;
@@ -30,13 +31,15 @@ public class StateMachineEditor extends GraphicalEditor {
 	}
 	
 	//Method that creates the related nodeinstance object TODO
-	public NodeInstance CreateNodeInstance(){
+	public NodeClass CreateBehavior(){
 		
-		NodeInstance instance = new NodeInstance(new NodeClass("NodeClass", new ConstructorCall("const")));
+		NodeClass nClass = new NodeClass("NodeClass", new ConstructorCall("const"));
 		
-		instance.setLabel("nodeInstance");
+		NodeClass nClasss = new NodeClass("Albert", new ConstructorCall("const"));
+		nClasss.setShape(new Rectangle(30,50,250,150));
+		nClass.addSubClass(nClasss);
 		
-		return instance;
+		return nClass;
 		
 	}
 	
@@ -52,7 +55,8 @@ public class StateMachineEditor extends GraphicalEditor {
 	//TODO
 	protected void initializeGraphicalViewer() {
 		GraphicalViewer viewer = getGraphicalViewer();
-		viewer.setContents(CreateNodeInstance());
+		//viewer.setContents(composer.ClassView.getNodeClass());
+		viewer.setContents(CreateBehavior());
 	}
 
 

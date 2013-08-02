@@ -6,6 +6,7 @@ import org.eclipse.ui.IPersistableElement;
 
 public class StateMachineEditorInput implements IEditorInput {
 	
+	//Attributes
 	public String name = null;
 	
 	//Constructor setting the name
