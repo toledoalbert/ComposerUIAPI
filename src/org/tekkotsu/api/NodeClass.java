@@ -118,7 +118,9 @@ public class NodeClass extends Graphical{
 		return variables;
 	}
 	
-
+	public NodeClass getParent(){
+		return parent;
+	}
 	
 
 
@@ -165,7 +167,9 @@ public class NodeClass extends Graphical{
 		this.variables = vars;
 	}
 	
-
+	public void setParent(NodeClass parent){
+		this.parent = parent;
+	}
 
 
 	//Mutator methods that adds/ removes single element to/from the list attributes.
