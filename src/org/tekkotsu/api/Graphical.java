@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.eclipse.draw2d.geometry.Rectangle;
 
-public class Graphical {
+public class Graphical extends AbstractModel {
 	
 	//Attributes
 	private Rectangle shape;
@@ -48,6 +48,12 @@ public class Graphical {
 	
 	public List<Graphical> getChildren(){
 		return this.children;
+	}
+
+	@Override
+	public boolean isPreview() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

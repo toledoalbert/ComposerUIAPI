@@ -1,14 +1,18 @@
 package org.tekkotsu.gef;
 
+
+import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.tekkotsu.api.Graphical;
 import org.tekkotsu.api.NodeInstance;
+import org.tekkotsu.policies.AppEditLayoutPolicy;
 
-public class NodeInstancePart extends AbstractGraphicalEditPart {
+public class NodeInstancePart extends AppAbstractEditPart {
 
 	@Override
 	//Method to return the figure
@@ -22,8 +26,12 @@ public class NodeInstancePart extends AbstractGraphicalEditPart {
 	}
 	
 	@Override
+	//Employs edit policies when node instance is moved or deleted
 	protected void createEditPolicies(){
-		
+
+		//Install the appeditlayout policy
+		installEditPolicy(EditPolicy.LAYOUT_ROLE, new AppEditLayoutPolicy());
+
 	}
 	
 	//Refresh all the visuals with the updated values.
@@ -46,6 +54,15 @@ public class NodeInstancePart extends AbstractGraphicalEditPart {
 	//Method to return children (graphical)
 	public List<Graphical> getModelChildren(){
 		return new ArrayList<Graphical>();
+	}
+	
+	//Refreshes visuals if properties are changed (Node is moved)
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		
+		//Refreshes view when moved
+		if (evt.getPropertyName().equals(Graphical.PROPERTY_LAYOUT)) refreshVisuals();
+		
 	}
 	
 }

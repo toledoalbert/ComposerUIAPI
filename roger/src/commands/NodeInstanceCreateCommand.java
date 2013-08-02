@@ -9,19 +9,24 @@ import tgef.Entreprise;
 
 public class NodeInstanceCreateCommand extends Command{
 	
-	private Entreprise en;
-	private NodeInstance srv;
+	//Attributes
+	private SetupMachine setup;
+	private NodeInstance instance;
 	
+	//Constructor
 	public NodeInstanceCreateCommand() {
-	super();
-	en = null;
-	srv = null;
+		
+		super();
+		setup = null;
+		instance = null;
+		
 	}
 	
- 
+	//
 	public void setNodeInstance(Object s) {
-	if (s instanceof NodeInstance)
-	this.srv = (NodeInstance)s;
+		
+		if (s instanceof NodeInstance)
+			this.srv = (NodeInstance)s;
 	}
 	
 	

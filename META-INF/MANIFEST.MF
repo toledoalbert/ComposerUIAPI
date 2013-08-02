@@ -12,3 +12,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ClassPath: xstream/xstream-1.4.4.jar,
  .
+Import-Package: org.eclipse.ui.views.properties

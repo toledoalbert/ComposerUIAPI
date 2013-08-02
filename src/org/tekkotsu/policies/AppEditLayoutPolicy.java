@@ -1,26 +1,20 @@
-package editpolicies;
+package org.tekkotsu.policies;
 
-import tekkotsu.edit.parts.SubConnectionEditPart;
-import tgef.EmployeFigure;
-import tgef.EmployePart;
-import tgef.EntreprisePart;
-import tgef.NodeInstanceFigure;
-import tgef.NodeInstancePart;
-import tgef.ServiceFigure;
-import tgef.ServicePart;
+
 import org.eclipse.gef.EditPart;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.XYLayoutEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
-import commands.AbstractLayoutCommand;
-import commands.EmployeChangeLayoutCommand;
-import commands.MoveBendpointCommand;
-import commands.NodeInstanceChangeLayoutCommand;
-import commands.NodeInstanceCreateCommand;
-import commands.ServiceChangeLayoutCommand;
-import commands.ServiceCreateCommand;
+import org.tekkotsu.commands.AbstractLayoutCommand;
+import org.tekkotsu.commands.NodeClassChangeLayoutCommand;
+import org.tekkotsu.commands.NodeInstanceChangeLayoutCommand;
+import org.tekkotsu.commands.SetupMachineChangeLayoutCommand;
+import org.tekkotsu.gef.NodeClassPart;
+import org.tekkotsu.gef.NodeInstancePart;
+import org.tekkotsu.gef.SetupMachinePart;
+
 
 public class AppEditLayoutPolicy extends XYLayoutEditPolicy{
 	
@@ -59,7 +53,7 @@ public class AppEditLayoutPolicy extends XYLayoutEditPolicy{
 	
 	@Override
 	protected Command getCreateCommand(CreateRequest request) {
-
+		/*
 		if (request.getType() == REQ_CREATE &&  getHost() instanceof SetupMachinePart) {
 			
 			//Create the nodeinstance creation command
@@ -79,7 +73,7 @@ public class AppEditLayoutPolicy extends XYLayoutEditPolicy{
 			return cmd;
 				
 		}
-
+*/
 		return null;
 	}
 	
