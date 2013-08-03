@@ -23,6 +23,7 @@
          point="org.eclipse.ui.editors">
       <editor
             class="org.tekkotsu.gef.StateMachineEditor"
+            contributorClass="composer.StateMachineEditorActionBarContributor"
             default="true"
             id="editor.statemachineeditor"
             name="StateMachineEditor">

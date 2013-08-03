@@ -10,6 +10,7 @@ import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.tekkotsu.api.Graphical;
 import org.tekkotsu.api.NodeInstance;
+import org.tekkotsu.policies.AppDeletePolicy;
 import org.tekkotsu.policies.AppEditLayoutPolicy;
 
 public class NodeInstancePart extends AppAbstractEditPart {
@@ -26,12 +27,13 @@ public class NodeInstancePart extends AppAbstractEditPart {
 	}
 	
 	@Override
-	//Employs edit policies when node instance is moved or deleted
 	protected void createEditPolicies(){
 
 		//Install the appeditlayout policy
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, new AppEditLayoutPolicy());
-
+		
+		//Install the delete policy
+		installEditPolicy(EditPolicy.COMPONENT_ROLE, new AppDeletePolicy());
 	}
 	
 	//Refresh all the visuals with the updated values.
@@ -59,10 +61,16 @@ public class NodeInstancePart extends AppAbstractEditPart {
 	//Refreshes visuals if properties are changed (Node is moved)
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		
+		System.out.println("Event fired");
 		//Refreshes view when moved
 		if (evt.getPropertyName().equals(Graphical.PROPERTY_LAYOUT)) refreshVisuals();
+
+		//Refreshes view when deleted
+		if (evt.getPropertyName().equals(Graphical.PROPERTY_REMOVE)){System.out.println("right before refresh"); refreshChildren();}
 		
+		//Refreshes view when add
+		if (evt.getPropertyName().equals(Graphical.PROPERTY_ADD)) refreshChildren();
+
 	}
 	
 }

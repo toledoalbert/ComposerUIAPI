@@ -22,12 +22,11 @@ public class AppEditLayoutPolicy extends XYLayoutEditPolicy{
 	protected Command createChangeConstraintCommand(EditPart child, Object constraint) {
 	
 		AbstractLayoutCommand command = null;
-		
-		if (child instanceof NodeClassPart) {
+		if(child instanceof NodeClassPart){
 			
 			command = new NodeClassChangeLayoutCommand();
 			
-		} else if (child instanceof SetupMachinePart) {
+		}else if (child instanceof SetupMachinePart) {
 			
 			command = new SetupMachineChangeLayoutCommand();
 			

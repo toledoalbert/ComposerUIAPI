@@ -18,12 +18,6 @@ import org.eclipse.jface.viewers.CellEditor.LayoutData;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertySource;
 
-
-/*
- * Jdom code
- * import org.jdom.Content;
- */
-
 abstract public class AbstractModel implements IAdaptable {
 	
 	//Attributes

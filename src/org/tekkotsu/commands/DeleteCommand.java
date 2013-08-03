@@ -1,11 +1,11 @@
-package commands;
+package org.tekkotsu.commands;
 
 import org.eclipse.gef.commands.Command;
+import org.tekkotsu.api.Graphical;
 
-import tgef.Node;
 //Delete Command
 
-public class DeleteCommands extends Command {
+public class DeleteCommand extends Command {
 	
 	//Attributes
 	private Graphical model;

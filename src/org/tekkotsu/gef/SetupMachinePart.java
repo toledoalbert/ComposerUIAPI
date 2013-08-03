@@ -11,6 +11,7 @@ import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.tekkotsu.api.Graphical;
 import org.tekkotsu.api.NodeInstance;
 import org.tekkotsu.api.SetupMachine;
+import org.tekkotsu.policies.AppDeletePolicy;
 import org.tekkotsu.policies.AppEditLayoutPolicy;
 
 public class SetupMachinePart extends AppAbstractEditPart {
@@ -31,6 +32,9 @@ public class SetupMachinePart extends AppAbstractEditPart {
 
 		//Install the appeditlayout policy
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, new AppEditLayoutPolicy());
+		
+		//Install the delete policy
+		installEditPolicy(EditPolicy.COMPONENT_ROLE, new AppDeletePolicy());
 	}
 	
 	//Refresh all the visuals with the updated values.
@@ -74,6 +78,12 @@ public class SetupMachinePart extends AppAbstractEditPart {
 		
 		//Refreshes view when moved
 		if (evt.getPropertyName().equals(Graphical.PROPERTY_LAYOUT)) refreshVisuals();
+		
+		//Refreshes view when deleted
+		if (evt.getPropertyName().equals(Graphical.PROPERTY_REMOVE)) refreshChildren();
+		
+		//Refreshes view when add
+		if (evt.getPropertyName().equals(Graphical.PROPERTY_ADD)) refreshChildren();
 		
 	}
 	
