@@ -29,7 +29,7 @@ public class Graphical extends AbstractModel {
 	public void setShape(Rectangle shape){
 		Rectangle oldShape= this.shape;
 		this.shape = shape;
-		getListeners().firePropertyChange(AbstractModel.PROPERTY_LAYOUT, true, false);
+		getListeners().firePropertyChange(AbstractModel.PROPERTY_LAYOUT, oldShape, shape);
 	}
 
 	public void setParent(Graphical parent){
@@ -37,6 +37,7 @@ public class Graphical extends AbstractModel {
 	}
 	
 	public boolean addChild(Graphical child){
+		
 		//Add the children and keep the boolean in b
 		boolean b = this.children.add(child);
 		//Check if added
@@ -50,14 +51,28 @@ public class Graphical extends AbstractModel {
 	}
 	
 	public boolean removeChild(Graphical child){
+		
+		//Check what is being removed and remove the real thing 
+		if(this instanceof SetupMachine && child instanceof NodeInstance){
+			
+			SetupMachine s = (SetupMachine)this;
+			s.removeNode((NodeInstance)child);
+			
+		}else if(this instanceof NodeClass && child instanceof SetupMachine){
+			
+			NodeClass n = (NodeClass)this;
+			n.setSetupMachine(null);
+		}
+		
 		//Add the child and keep the boolean
 		boolean b = this.children.remove(child);
 		
 		//Check if removed
 		if(b){
+			
 			System.out.println("Child removed   " + child);
-			getListeners().firePropertyChange(AbstractModel.PROPERTY_REMOVE, true, false); //TODO
-			//getListeners().firePropertyChange(new PropertyChangeEvent(child, AbstractModel.PROPERTY_REMOVE, child, null));
+			getListeners().firePropertyChange(AbstractModel.PROPERTY_REMOVE, child, null); //TODO
+			
 		}
 		
 		//return

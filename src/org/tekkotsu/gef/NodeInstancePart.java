@@ -66,7 +66,7 @@ public class NodeInstancePart extends AppAbstractEditPart {
 		if (evt.getPropertyName().equals(Graphical.PROPERTY_LAYOUT)) refreshVisuals();
 
 		//Refreshes view when deleted
-		if (evt.getPropertyName().equals(Graphical.PROPERTY_REMOVE)){System.out.println("right before refresh"); refreshChildren();}
+		if (evt.getPropertyName().equals(Graphical.PROPERTY_REMOVE)){System.out.println("right before refresh"); refreshChildren(); refreshVisuals();}
 		
 		//Refreshes view when add
 		if (evt.getPropertyName().equals(Graphical.PROPERTY_ADD)) refreshChildren();

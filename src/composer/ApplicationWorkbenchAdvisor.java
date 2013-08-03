@@ -31,6 +31,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 	public void preStartup(){
 		
 	}
+
 	
 	//post startup method.
 	@Override
