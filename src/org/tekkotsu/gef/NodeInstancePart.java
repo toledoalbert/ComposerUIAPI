@@ -61,15 +61,16 @@ public class NodeInstancePart extends AppAbstractEditPart {
 	//Refreshes visuals if properties are changed (Node is moved)
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
+		
 		System.out.println("Event fired");
 		//Refreshes view when moved
 		if (evt.getPropertyName().equals(Graphical.PROPERTY_LAYOUT)) refreshVisuals();
 
 		//Refreshes view when deleted
-		if (evt.getPropertyName().equals(Graphical.PROPERTY_REMOVE)){System.out.println("right before refresh"); refreshChildren(); refreshVisuals();}
-		
+		if (evt.getPropertyName().equals(Graphical.PROPERTY_REMOVE)){System.out.println("right before refresh"); refreshVisuals();}
+		System.out.println("before checking if event is add");
 		//Refreshes view when add
-		if (evt.getPropertyName().equals(Graphical.PROPERTY_ADD)) refreshChildren();
+		if (evt.getPropertyName().equals(Graphical.PROPERTY_ADD)){System.out.println("got the add event right before refreshing children"); refreshChildren();};
 
 	}
 	

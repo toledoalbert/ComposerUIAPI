@@ -38,13 +38,31 @@ public class Graphical extends AbstractModel {
 	
 	public boolean addChild(Graphical child){
 		
+		//Check what is being removed and remove the real thing 
+		if(this instanceof SetupMachine && child instanceof NodeInstance){
+			
+			SetupMachine s = (SetupMachine)this;
+			NodeInstance n = (NodeInstance)child;
+			
+			if(!s.contains(n)){
+				s.addNode((NodeInstance)child);
+				System.out.println("node added to the real object");
+			}
+			
+			
+		}
+		
 		//Add the children and keep the boolean in b
 		boolean b = this.children.add(child);
+		
 		//Check if added
 		if(b){
 			child.setParent(this);
-			getListeners().firePropertyChange(AbstractModel.PROPERTY_ADD, null, child);
+			System.out.println("just set the parent");
+			getListeners().firePropertyChange(AbstractModel.PROPERTY_ADD, true, false);
 		}
+		
+		System.out.println("right before returning true");
 		
 		//return the b
 		return b;
@@ -71,7 +89,7 @@ public class Graphical extends AbstractModel {
 		if(b){
 			
 			System.out.println("Child removed   " + child);
-			getListeners().firePropertyChange(AbstractModel.PROPERTY_REMOVE, child, null); //TODO
+			getListeners().firePropertyChange(AbstractModel.PROPERTY_REMOVE, child, null);
 			
 		}
 		
@@ -107,6 +125,11 @@ public class Graphical extends AbstractModel {
 	}
 	public void removePropertyChangeListener(PropertyChangeListener listener) {
 		listeners.removePropertyChangeListener(listener);
+	}
+	
+	//Contains method
+	public boolean contains(Graphical child){
+		return children.contains(child);
 	}
 	
 }

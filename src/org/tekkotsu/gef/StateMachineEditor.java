@@ -2,7 +2,9 @@ package org.tekkotsu.gef;
 
 
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -15,10 +17,18 @@ import org.eclipse.gef.MouseWheelHandler;
 import org.eclipse.gef.MouseWheelZoomHandler;
 import org.eclipse.gef.editparts.ScalableRootEditPart;
 import org.eclipse.gef.editparts.ZoomManager;
+import org.eclipse.gef.palette.CombinedTemplateCreationEntry;
+import org.eclipse.gef.palette.MarqueeToolEntry;
+import org.eclipse.gef.palette.PaletteDrawer;
+import org.eclipse.gef.palette.PaletteGroup;
+import org.eclipse.gef.palette.PaletteRoot;
+import org.eclipse.gef.palette.PaletteSeparator;
+import org.eclipse.gef.palette.SelectionToolEntry;
 import org.eclipse.gef.ui.actions.GEFActionConstants;
 import org.eclipse.gef.ui.actions.ZoomInAction;
 import org.eclipse.gef.ui.actions.ZoomOutAction;
 import org.eclipse.gef.ui.parts.GraphicalEditor;
+import org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -30,15 +40,22 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.tekkotsu.api.ConstructorCall;
+import org.tekkotsu.api.DefaultClassReader;
 import org.tekkotsu.api.NodeClass;
 import org.tekkotsu.api.NodeInstance;
 import org.tekkotsu.api.SetupMachine;
+import org.tekkotsu.api.TransitionClass;
+import org.tekkotsu.factories.NodeCreationFactory;
+import org.tekkotsu.factories.*;
 
-
-public class StateMachineEditor extends GraphicalEditor {
+public class StateMachineEditor extends GraphicalEditorWithFlyoutPalette {
 	
 	//ID of the editor
 	public static final String ID = "editor.statemachineeditor";
+	
+	// Hashmaps to store the nodeclasses and names.
+	static final HashMap<String, NodeClass> nodesMap = new HashMap<String, NodeClass>();
+	static final HashMap<String, TransitionClass> transitionsMap = new HashMap<String, TransitionClass>();
 	
 	//Constructor
 	public StateMachineEditor(){
@@ -51,10 +68,17 @@ public class StateMachineEditor extends GraphicalEditor {
 	
 	//TODO
 	protected void initializeGraphicalViewer() {
+		
 		GraphicalViewer viewer = getGraphicalViewer();
+		
+		/*
+		SetupMachine s = new SetupMachine();
+		NodeClass n = new NodeClass("Albert", new ConstructorCall("const"));
+		n.setSetupMachine(s);*/
+		
 		viewer.setContents(composer.ClassView.getNodeClass());
 		//viewer.setContents(CreateBehavior());
-		//viewer.setContents(new SetupMachine());
+		//viewer.setContents(n);
 	}
 
 
@@ -136,6 +160,118 @@ public class StateMachineEditor extends GraphicalEditor {
 		}*/
 		return super.getAdapter(type);
 	}
+	
+	//Return the map of the nodes
+	public static HashMap<String, NodeClass> getNodesMap(){
+		return nodesMap;
+	}
+
+
+	@Override
+	protected PaletteRoot getPaletteRoot() {
+		PaletteRoot root = new PaletteRoot();
+
+		PaletteGroup manipGroup = new PaletteGroup("Manipulation objets");
+		root.add(manipGroup);
+
+		SelectionToolEntry selectionToolEntry = new SelectionToolEntry();
+		manipGroup.add(selectionToolEntry);
+		manipGroup.add(new MarqueeToolEntry());
+
+		root.setDefaultEntry(selectionToolEntry);
+
+		// Ads separator
+
+		PaletteSeparator sep2 = new PaletteSeparator();
+		root.add(sep2);
+		PaletteGroup instGroup = new PaletteGroup("Creation elements");
+		root.add(instGroup);
+
+		// Drag and drop Node
+
+		{
+
+			try {
+
+				// Read nodes in
+				final ArrayList<NodeClass> nodesList = new DefaultClassReader()
+				.getNodes();
+
+				for (int i = 0; i < nodesList.size(); i++) {
+
+					// Current node to operate with.
+					NodeClass currentNode = nodesList.get(i);
+
+					// Add name and the nodeclass object to the map
+					nodesMap.put(currentNode.getName(), currentNode);
+
+					// Create instance object
+					NodeInstance instance = new NodeInstance(currentNode);
+
+					CombinedTemplateCreationEntry entry = new CombinedTemplateCreationEntry(
+							currentNode.getName(), "Creation of a "
+									+ currentNode.getName(), instance,
+									new NodeCreationFactory(NodeInstance.class,
+											currentNode.getName()), null, null);
+					// entry.addTemplateTransferDragSourceListener();
+
+					instGroup.add(entry);
+				}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+		PaletteSeparator sep3 = new PaletteSeparator();
+		root.add(sep3);
+
+		PaletteDrawer connectionElements = new PaletteDrawer(
+				"Connecting Elements");
+		root.add(connectionElements);
+
+		{
+			/*
+			try {
+
+				// Read nodes in
+				final ArrayList<TransitionClass> transitionsList = new DefaultClassReader()
+				.getTransitions();
+
+				for (int i = 0; i < transitionsList.size(); i++) {
+
+					// Current node to operate with.
+					TransitionClass currentTransition = transitionsList.get(i);
+
+					// Add name and the nodeclass object to the map
+					transitionsMap.put(currentTransition.getName(),
+							currentTransition);
+
+					// Create instance object
+					TransitionInstance instance = new TransitionInstance(
+							currentTransition);
+
+					connectionElements.add(new ConnectionCreationToolEntry(
+							currentTransition.getName(), "Create "
+									+ currentTransition.getName()
+									+ " Connections",
+									new TransitionInstanceCreationFactory(
+											TransitionInstance.class, currentTransition
+											.getName()), null, null));
+
+				}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+
+		}
+
+		return root;
+
+	}
+	
 	
 
 }

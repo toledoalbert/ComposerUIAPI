@@ -10,6 +10,10 @@ import org.eclipse.draw2d.geometry.Rectangle;
 
 public class NodeInstanceFigure extends Figure{
 
+	//Constants
+	public static final int NODEINSTANCE_FIGURE_DEFWIDTH = 150;
+	public static final int NODEINSTANCE_FIGURE_DEFHEIGHT = 150;
+	
 	//Attributes
 	private Label label = new Label();
 	private Label type = new Label();
