@@ -18,6 +18,8 @@ import org.eclipse.jface.viewers.CellEditor.LayoutData;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertySource;
 
+import composer.PropertyEditor;
+
 abstract public class AbstractModel implements IAdaptable {
 	
 	//Attributes
@@ -83,14 +85,14 @@ abstract public class AbstractModel implements IAdaptable {
 	//Just added this TODO test
 	@Override
 	public Object getAdapter(Class adapter) {
-		/*
+		
 		if (adapter == IPropertySource.class) { 
 			
 			if (propertySource == null) 
-			propertySource = new NodePropertySource(this); 
+			propertySource = new PropertyEditor(this); 
 			return propertySource; 
 			
-		} */
+		} 
 			return null; 
 	} 
 

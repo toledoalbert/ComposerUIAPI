@@ -48,6 +48,9 @@ public class SetupMachinePart extends AppAbstractEditPart {
 		//Set the labeltext to the instance label
 		fig.setLabelText("Setup Machine");
 		
+		//Set color to model color
+		fig.setBackgroundColor(setup.getColor());
+		
 		//Layout
 		fig.setLayout(setup.getShape());
 	}
@@ -84,6 +87,8 @@ public class SetupMachinePart extends AppAbstractEditPart {
 		
 		//Refreshes view when add
 		if (evt.getPropertyName().equals(Graphical.PROPERTY_ADD)) refreshChildren();
+		
+		if (evt.getPropertyName().equals(Graphical.PROPERTY_COL)) refreshVisuals();
 		
 	}
 	

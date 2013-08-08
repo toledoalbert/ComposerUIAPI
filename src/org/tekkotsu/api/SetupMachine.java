@@ -1,6 +1,8 @@
 package org.tekkotsu.api;
 import java.util.ArrayList;
 
+import org.eclipse.draw2d.ColorConstants;
+
 //Node class for the Tekkotsu State Machine Composer
 //Author: Albert Berk Toledo
 //Start date: 06/17/2013
@@ -18,6 +20,7 @@ public class SetupMachine extends Graphical{
 	//Constructor
 	public SetupMachine(ArrayList<NodeInstance> Nodes, ArrayList<TransitionInstance> Transitions){
 		super();
+		super.setColor(ColorConstants.green);
 		this.Nodes = Nodes;
 		this.Transitions = Transitions;
 	}
@@ -25,6 +28,7 @@ public class SetupMachine extends Graphical{
 	//No argument constructor to initialize empty setup machine.
 	public SetupMachine(){
 		super();
+		super.setColor(ColorConstants.green);
 		this.Nodes = new ArrayList<NodeInstance>();
 		this.Transitions = new ArrayList<TransitionInstance>();
 	}

@@ -34,7 +34,6 @@ public class NodeInstanceFigure extends Figure{
 		setConstraint(type, new Rectangle(5, 17, -1, -1));
 
 		setForegroundColor(ColorConstants.black);
-		setBackgroundColor(ColorConstants.orange);
 		
 		setBorder(new LineBorder(5));
 		setOpaque(true);

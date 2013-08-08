@@ -46,6 +46,10 @@ public class NodeInstancePart extends AppAbstractEditPart {
 		
 		//Set the labeltext to the instance label
 		fig.setLabelText(instance.getLabel());
+		
+		//Set the color to the model color
+		fig.setBackgroundColor(instance.getColor());
+		
 		//Set the type to the name of the nodeclass object in type field.
 		fig.setTypeText(instance.getType().getName());
 		
@@ -65,6 +69,10 @@ public class NodeInstancePart extends AppAbstractEditPart {
 		System.out.println("Event fired");
 		//Refreshes view when moved
 		if (evt.getPropertyName().equals(Graphical.PROPERTY_LAYOUT)) refreshVisuals();
+		
+		if (evt.getPropertyName().equals(Graphical.PROPERTY_COL)) refreshVisuals();
+		
+		if (evt.getPropertyName().equals(NodeInstance.PROPERTY_LABEL)) refreshVisuals();
 
 		//Refreshes view when deleted
 		if (evt.getPropertyName().equals(Graphical.PROPERTY_REMOVE)){System.out.println("right before refresh"); refreshVisuals();}

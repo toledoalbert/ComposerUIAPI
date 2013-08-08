@@ -46,6 +46,9 @@ public class NodeClassPart extends AppAbstractEditPart {
 		//Get the model
 		NodeClass instance = (NodeClass)getModel();
 		
+		//Set the color to the model color
+		fig.setBackgroundColor(instance.getColor());
+		
 		//Set the labeltext to the instance label
 		fig.setNameText(instance.getName());
 		
@@ -94,6 +97,10 @@ public class NodeClassPart extends AppAbstractEditPart {
 		
 		//Refreshes view when add
 		if (evt.getPropertyName().equals(Graphical.PROPERTY_ADD)) refreshChildren();
+		
+		if (evt.getPropertyName().equals(NodeClass.PROPERTY_NAME)) refreshVisuals();
+		
+		if (evt.getPropertyName().equals(Graphical.PROPERTY_COL)) refreshVisuals();
 		
 	}
 	

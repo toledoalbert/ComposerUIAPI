@@ -31,7 +31,7 @@ public abstract class AppAbstractEditPart extends AbstractGraphicalEditPart impl
 	@Override
 	public void performRequest(Request req) {
 		
-		/*
+		
 		if (req.getType().equals(RequestConstants.REQ_OPEN)) {
 			
 			try {
@@ -43,6 +43,6 @@ public abstract class AppAbstractEditPart extends AbstractGraphicalEditPart impl
             }
 		 
 
-		}*/
+		}
 	}
 }

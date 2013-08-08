@@ -2,6 +2,9 @@ package org.tekkotsu.api;
 
 import java.util.ArrayList;
 
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.swt.graphics.Color;
+
 public class NodeInstance extends Graphical{
 	
 	//Attributes
@@ -10,31 +13,34 @@ public class NodeInstance extends Graphical{
 	private ArrayList<Parameter> parameters;
 	private ArrayList<TransitionInstance> outTrans;		//Outgoing transitions
 	private ArrayList<TransitionInstance> inTrans;		//Incoming transitions
-	private String color;
 	
+	//public static id's
+	public static final String PROPERTY_TYPE = "Node_InstanceType";
+	public static final String PROPERTY_PARAMETER="Node_InstanceParameter";
+	public static final String PROPERTY_LABEL="Node_Instance_Label";
 
 	//Full argument Constructor
 	public NodeInstance(NodeClass type, String label, ArrayList<Parameter> parameters, ArrayList<TransitionInstance> outTrans, ArrayList<TransitionInstance> inTrans){
 
 		super();
+		super.setColor(ColorConstants.orange);
 		this.type = type;
 		this.label = label;
 		this.parameters = parameters;
 		this.outTrans = outTrans;
 		this.inTrans = inTrans;
-		this.color = type.getColor();
 	}
 	
 	//Instance from type (nodeclass) constructor
 	public NodeInstance(NodeClass type){
 		
 		super();
+		super.setColor(ColorConstants.orange);
 		this.type = type;
 		this.label = type.getName().toLowerCase();
 		this.parameters = type.getParameters();
 		this.inTrans = new ArrayList<TransitionInstance>();
 		this.outTrans = new ArrayList<TransitionInstance>();
-		this.color = type.getColor();		//TODO Value can be manipulated for slightly lighter or darker.
 		
 	}
 
@@ -61,9 +67,9 @@ public class NodeInstance extends Graphical{
 		return inTrans;
 	}
 	
-	public String getColor(){
+	/*public String getColor(){
 		return color;
-	}
+	}*/
 
 	//Returns number of parameters.
 	public int getNumOfParameters(){
@@ -89,6 +95,7 @@ public class NodeInstance extends Graphical{
 	
 	public void setLabel(String label){
 		this.label = label;
+		getListeners().firePropertyChange(PROPERTY_LABEL, null, label);
 	}
 	
 	public void setParameters(ArrayList<Parameter> parameters){
@@ -103,9 +110,9 @@ public class NodeInstance extends Graphical{
 		this.inTrans = inTrans;
 	}
 	
-	public void setColor(String color){
+	/*public void setColor(String color){
 		this.color = color;
-	}
+	}*/
 	
 	//Add/Remove parameters
 	public void addParameter(Parameter parameter){

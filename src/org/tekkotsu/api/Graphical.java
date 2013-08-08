@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.swt.graphics.Color;
 
 public class Graphical extends AbstractModel {
 	
@@ -15,6 +16,10 @@ public class Graphical extends AbstractModel {
 	private List<Graphical> children;
 	private Graphical parent;
 	private PropertyChangeSupport listeners;
+	private Color color;
+	
+	//static property fields
+	public static final String PROPERTY_COL = "NodeInstanceColor";
 	
 	//Constructor
 	public Graphical(){
@@ -23,6 +28,7 @@ public class Graphical extends AbstractModel {
 		this.parent = null;
 		this.children = new ArrayList<Graphical>();
 		this.listeners = new PropertyChangeSupport(this);
+		this.color = createRandomColor();
 	}
 	
 	//Mutators
@@ -30,6 +36,15 @@ public class Graphical extends AbstractModel {
 		Rectangle oldShape= this.shape;
 		this.shape = shape;
 		getListeners().firePropertyChange(AbstractModel.PROPERTY_LAYOUT, oldShape, shape);
+	}
+	
+	//Sets Color
+	public void setColor(Color col) {
+
+		Color oldColor = this.color;
+		this.color = col;
+		getListeners().firePropertyChange(PROPERTY_COL, oldColor, col);
+		
 	}
 
 	public void setParent(Graphical parent){
@@ -104,6 +119,10 @@ public class Graphical extends AbstractModel {
 		return shape;
 	}
 	
+	public Color getColor(){
+		return color;
+	}
+	
 	public Graphical getParent(){
 		return this.parent;
 	}
@@ -132,6 +151,14 @@ public class Graphical extends AbstractModel {
 	//Contains method
 	public boolean contains(Graphical child){
 		return children.contains(child);
+	}
+	
+	//return random color object
+	private Color createRandomColor() {
+		return new Color(null,
+		(new Double(Math.random() * 128)).intValue() + 128 ,
+		(new Double(Math.random() * 128)).intValue() + 128 ,
+		(new Double(Math.random() * 128)).intValue() + 128 );
 	}
 	
 }

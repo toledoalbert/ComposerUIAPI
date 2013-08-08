@@ -1,6 +1,9 @@
 package org.tekkotsu.api;
 import java.util.ArrayList;
 
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.swt.graphics.Color;
+
 //Node class for the Tekkotsu State Machine Composer
 //Author: Albert Berk Toledo
 //Start date: 06/17/2013
@@ -14,15 +17,16 @@ public class NodeClass extends Graphical{
 	private String definition;					//Definition of the node
 	private SetupMachine setup;					//List of the nodes contained
 	private ArrayList<ConstructorCall> parents;	//Constructors of parents
-	private ConstructorCall constructor;		//Constructor
-	private String color;						//Color of the node
+	private ConstructorCall constructor;		//Constructor						//Color of the node
 	private ArrayList<Method> methods;			//Methods of the class
 	private ArrayList<Variable> variables;		//Variables withing the class.
 	private ArrayList<NodeClass> subClasses;	//Node classes defined in this class.
 	private NodeClass parent;					//Parent class if this is a subclass
 
+	//static ID's
+	public static final String PROPERTY_NAME = "Node_ClassName";
 	
-
+	
 	/*
 	//Full argument constructor
 	public NodeClass(String name, SetupMachine setup, ConstructorCall constructor, String color, String definition, ArrayList<ConstructorCall> parents){
@@ -39,10 +43,10 @@ public class NodeClass extends Graphical{
 	//3 Argument Constructor. Sets default values for the rest of the fields.
 	public NodeClass(String name, ConstructorCall constructor){
 		super();
+		super.setColor(ColorConstants.yellow);
 		this.name = name;
 		this.setup = null;					//No setup machine by default.
 		this.constructor = constructor;
-		this.color = "white";								//TODO default color white.
 		this.definition = "New Node Class: " + name;		//TODO default definition
 		this.parents = new ArrayList<ConstructorCall>();
 		this.methods = new ArrayList<Method>();
@@ -54,10 +58,10 @@ public class NodeClass extends Graphical{
 	//Constructor for a nodeclass that serves as a statemachine to be used as a behavior.
 	public NodeClass(String name, SetupMachine setup){
 		super();
+		super.setColor(ColorConstants.yellow);
 		this.name = name;
 		this.setup = setup;
 		this.constructor = null;
-		this.color = "white";
 		this.definition = "New Node Class: " + name;
 		this.parents = new ArrayList<ConstructorCall>();
 		this.methods = new ArrayList<Method>();
@@ -86,9 +90,9 @@ public class NodeClass extends Graphical{
 	}
 	
 	
-	public String getColor(){
-		return color;
-	}
+	/*public Color getColor(){
+		return super.color;
+	}*/
 	
 	public int getNumOfParameters(){
 		return this.constructor.getParameters().size();
@@ -129,6 +133,7 @@ public class NodeClass extends Graphical{
 	//Mutator methods
 	public void setName(String name){
 		this.name = name;
+		getListeners().firePropertyChange(PROPERTY_NAME, null, name);
 	}
 	
 	public void setDefinition(String definition){
@@ -148,9 +153,9 @@ public class NodeClass extends Graphical{
 		this.constructor = constructor;
 	}
 	
-	public void setColor(String color){
+	/*public void setColor(String color){
 		this.color = color;
-	}
+	}*/
 	
 	public void setParents(ArrayList<ConstructorCall> parents){
 		this.parents = parents;

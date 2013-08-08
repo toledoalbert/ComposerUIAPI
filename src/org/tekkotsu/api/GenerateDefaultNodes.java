@@ -32,7 +32,7 @@ public class GenerateDefaultNodes {
 		System.out.println("Components of soundNode created.");
 		//Create SoundNode
 		NodeClass soundNode = new NodeClass("SoundNode", soundNodeConstructor);
-		soundNode.setColor("#0AAF53");
+		//soundNode.setColor("#0AAF53");
 		soundNode.setDefinition("Plays a sound then signals completion.");
 		System.out.println("SoundNode object created.");
 		defaultNodes.add(soundNode);
@@ -42,7 +42,7 @@ public class GenerateDefaultNodes {
 		System.out.println("Components of stateNode created.");
 		//Create StateNode
 		NodeClass stateNode = new NodeClass("StateNode", stateNodeConstructor);
-		stateNode.setColor("#C0C0C0");
+		//stateNode.setColor("#C0C0C0");
 		stateNode.setDefinition("No action. Parent for all other node classes.");
 		System.out.println("StateNode object created.");
 		defaultNodes.add(stateNode);
@@ -56,7 +56,7 @@ public class GenerateDefaultNodes {
 		System.out.println("Components of speechNode created.");
 		//Create SpeechNode
 		NodeClass speechNode = new NodeClass("SpeechNode", speechNodeConstructor);
-		speechNode.setColor("#FFC200");
+		//speechNode.setColor("#FFC200");
 		speechNode.setDefinition("Speaks some text then signals completion.");
 		System.out.println("SpeechNode object created.");
 		defaultNodes.add(speechNode);
@@ -67,7 +67,7 @@ public class GenerateDefaultNodes {
 		System.out.println("Components of speechNode created.");
 		//Create LedNode
 		NodeClass ledNode = new NodeClass("LedNode", ledNodeConstructor);
-		speechNode.setColor("#003DFF");
+		//speechNode.setColor("#003DFF");
 		speechNode.setDefinition("Flashes the robot's LED's.");
 		System.out.println("SpeechNode object created.");
 		defaultNodes.add(ledNode);
