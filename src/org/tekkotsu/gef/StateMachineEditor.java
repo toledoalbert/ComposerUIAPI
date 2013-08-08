@@ -69,13 +69,26 @@ public class StateMachineEditor extends GraphicalEditorWithFlyoutPalette {
 	//TODO
 	protected void initializeGraphicalViewer() {
 		
+		//Create the viewer object
 		GraphicalViewer viewer = getGraphicalViewer();
 		
+		//Get the parent nodeclass for the behavior
 		NodeClass beh = composer.ClassView.getNodeClass();
+		
+		//Get the setup machine from the nodeclass that might be null too
 		SetupMachine setup = beh.getSetupMachine();
-		ArrayList<NodeInstance> nodes = setup.getNodes();
 		
+		//Create the list to hold the node instances
+		ArrayList<NodeInstance> nodes = new ArrayList<NodeInstance>();
 		
+		//if setup machine is not null
+		if(setup != null){
+			
+			//get the list of the node instances
+			nodes = setup.getNodes();
+		}
+		
+		//get all the nodes and set their shapes and positions
 		for(int i = 0; i < nodes.size(); i++){
 			int x = 200*(i+1);
 			nodes.get(i).setShape(new Rectangle(x,40,150,150));
