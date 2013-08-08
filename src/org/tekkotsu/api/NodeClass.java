@@ -142,7 +142,9 @@ public class NodeClass extends Graphical{
 	
 	public void setSetupMachine(SetupMachine setup){
 		this.setup = setup;
-		this.addChild2(setup);
+		
+		if(setup != null)
+			this.addChild2(setup);
 	}
 	
 	public void setParameters(ArrayList<Parameter> parameters){

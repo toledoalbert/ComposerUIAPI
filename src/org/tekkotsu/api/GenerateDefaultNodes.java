@@ -68,7 +68,7 @@ public class GenerateDefaultNodes {
 		//Create LedNode
 		NodeClass ledNode = new NodeClass("LedNode", ledNodeConstructor);
 		//speechNode.setColor("#003DFF");
-		speechNode.setDefinition("Flashes the robot's LED's.");
+		ledNode.setDefinition("Flashes the robot's LED's.");
 		System.out.println("SpeechNode object created.");
 		defaultNodes.add(ledNode);
 		
