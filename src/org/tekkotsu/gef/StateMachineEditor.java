@@ -233,8 +233,7 @@ public class StateMachineEditor extends GraphicalEditorWithFlyoutPalette {
 			try {
 
 				// Read nodes in
-				final ArrayList<NodeClass> nodesList = new DefaultClassReader()
-				.getNodes();
+				final ArrayList<NodeClass> nodesList = new DefaultClassReader().getNodes();
 
 				for (int i = 0; i < nodesList.size(); i++) {
 
@@ -252,6 +251,7 @@ public class StateMachineEditor extends GraphicalEditorWithFlyoutPalette {
 									+ currentNode.getName(), instance,
 									new NodeCreationFactory(NodeInstance.class,
 											currentNode.getName()), null, null);
+					
 					// entry.addTemplateTransferDragSourceListener();
 
 					instGroup.add(entry);
