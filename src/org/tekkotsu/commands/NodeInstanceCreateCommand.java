@@ -50,8 +50,8 @@ public class NodeInstanceCreateCommand extends Command{
 	
 	@Override
 	public void execute() {
-		
-		setup.addChild(instance);
+		System.out.println("execute");
+		setup.addNode(instance);
 		
 		//Real objects
 		//composer.ClassView.getNodeClass().getSetupMachine().addNode(instance);
@@ -68,7 +68,7 @@ public class NodeInstanceCreateCommand extends Command{
 
 	@Override
 	public void undo() {
-		setup.removeChild(instance);
+		setup.removeNode(instance);
 	}
 
 

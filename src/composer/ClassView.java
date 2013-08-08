@@ -40,6 +40,8 @@ import org.tekkotsu.wizards.TransWizard;
 
 public class ClassView extends ViewPart {
 
+	public static int counter = 3;
+	
 	//Data structures to store the fsm representations
 	static NodeClass behavior = new NodeClass("MyBehavior", new ConstructorCall("const"));
 	

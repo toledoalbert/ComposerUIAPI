@@ -57,9 +57,11 @@ public class NodeClassPart extends AppAbstractEditPart {
 	//Method to return children (graphical)
 	public List<Graphical> getModelChildren(){
 
+		
 		//Get the model
 		NodeClass nClass = (NodeClass)getModel();
 		
+		/*
 		//Get the list of subclasses
 		ArrayList<NodeClass> subs = nClass.getSubClasses();
 		
@@ -67,15 +69,15 @@ public class NodeClassPart extends AppAbstractEditPart {
 		for(int i = 0; i < subs.size(); i++){
 			int x = 200*(i+1);
 			subs.get(i).setShape(new Rectangle(x,40,150,150));
-			nClass.addChild(subs.get(i));
+			nClass.addChild2(subs.get(i));
 		}
 		
 		//Add the setupmachine if exists to the list of children too.
 		if(nClass.getSetupMachine() != null){
 			nClass.getSetupMachine().setShape(new Rectangle(25,300,1000,300));
-			nClass.addChild(nClass.getSetupMachine());
+			nClass.addChild2(nClass.getSetupMachine());
 		}
-		
+		*/
 		return nClass.getChildren();
 
 	}	

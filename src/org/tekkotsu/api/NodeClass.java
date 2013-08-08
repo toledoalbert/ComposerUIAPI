@@ -137,6 +137,7 @@ public class NodeClass extends Graphical{
 	
 	public void setSetupMachine(SetupMachine setup){
 		this.setup = setup;
+		this.addChild2(setup);
 	}
 	
 	public void setParameters(ArrayList<Parameter> parameters){
@@ -223,14 +224,16 @@ public class NodeClass extends Graphical{
 
 	public void addSubClass(NodeClass subClass){
 		this.subClasses.add(subClass);
+		this.addChild2(subClass);
 	}
 	
 	public void removeSubClass(NodeClass subClass){
 		this.subClasses.remove(subClass);
+		this.removeChild(subClass);
 	}
 	
 	public void removeSubClass(int i){
-		this.subClasses.remove(i);
+		//this.subClasses.remove(i);
 	}
 	
 	

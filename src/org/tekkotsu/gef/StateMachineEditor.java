@@ -71,6 +71,32 @@ public class StateMachineEditor extends GraphicalEditorWithFlyoutPalette {
 		
 		GraphicalViewer viewer = getGraphicalViewer();
 		
+		NodeClass beh = composer.ClassView.getNodeClass();
+		SetupMachine setup = beh.getSetupMachine();
+		ArrayList<NodeInstance> nodes = setup.getNodes();
+		
+		
+		for(int i = 0; i < nodes.size(); i++){
+			int x = 200*(i+1);
+			nodes.get(i).setShape(new Rectangle(x,40,150,150));
+		}
+		
+		//Get the list of subclasses
+		ArrayList<NodeClass> subs = beh.getSubClasses();
+		
+		//Cast and add all the nodes from the list to the children list
+		for(int i = 0; i < subs.size(); i++){
+			int x = 200*(i+1);
+			subs.get(i).setShape(new Rectangle(x,40,150,150));
+			beh.addChild2(subs.get(i));
+		}
+		
+		//Add the setupmachine if exists to the list of children too.
+		if(beh.getSetupMachine() != null){
+			beh.getSetupMachine().setShape(new Rectangle(25,300,1000,300));
+			beh.addChild2(beh.getSetupMachine());
+		}
+		
 		/*
 		SetupMachine s = new SetupMachine();
 		NodeClass n = new NodeClass("Albert", new ConstructorCall("const"));

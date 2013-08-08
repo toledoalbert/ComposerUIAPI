@@ -74,6 +74,7 @@ public class SetupMachine extends Graphical{
 		}		
 		
 		this.Nodes.add(node);
+		this.addChild2(node);
 	}
 	
 	//Method to add a transition to the setup machine.
@@ -101,9 +102,7 @@ public class SetupMachine extends Graphical{
 		}
 		
 		//Remove transition from the transition list.
-		this.Transitions.add(transition);
-				
-		
+		this.Transitions.add(transition);		
 		
 	}
 	

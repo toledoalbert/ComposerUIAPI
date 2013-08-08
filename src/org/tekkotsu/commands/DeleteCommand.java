@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
 	}
 	
 	public void undo() {
-		this.parentModel.addChild(model);
+		this.parentModel.addChild2(model);
 	}
 
 }

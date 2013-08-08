@@ -36,10 +36,10 @@ public class Graphical extends AbstractModel {
 		this.parent = parent;
 	}
 	
-	public boolean addChild(Graphical child){
-		
+	public boolean addChild2(Graphical child){
+		System.out.println("entering addChild2" + child.toString());
 		//Check what is being removed and remove the real thing 
-		if(this instanceof SetupMachine && child instanceof NodeInstance){
+		/*if(this instanceof SetupMachine && child instanceof NodeInstance){
 			
 			SetupMachine s = (SetupMachine)this;
 			NodeInstance n = (NodeInstance)child;
@@ -48,10 +48,12 @@ public class Graphical extends AbstractModel {
 				s.addNode((NodeInstance)child);
 				System.out.println("node added to the real object");
 			}
-			
+			else{
+				System.out.println(1/composer.ClassView.counter--);
+			}
 			
 		}
-		
+		*/
 		//Add the children and keep the boolean in b
 		boolean b = this.children.add(child);
 		

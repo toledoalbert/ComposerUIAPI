@@ -57,7 +57,7 @@ public class SetupMachinePart extends AppAbstractEditPart {
 
 		//Get the model
 		SetupMachine setup = (SetupMachine)getModel();
-		
+		/*
 		//Get the list of nodeinstances
 		ArrayList<NodeInstance> nodes = setup.getNodes();
 		
@@ -65,9 +65,9 @@ public class SetupMachinePart extends AppAbstractEditPart {
 		for(int i = 0; i < nodes.size(); i++){
 			int x = 200*(i+1);
 			nodes.get(i).setShape(new Rectangle(x,40,150,150));
-			setup.addChild(nodes.get(i));
+			setup.addChild2(nodes.get(i));
 		}
-		
+		*/
 		return setup.getChildren();
 
 	}
