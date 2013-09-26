@@ -67,5 +67,17 @@
          </property>
       </product>
    </extension>
+   <extension
+         id="tekkotsucomposer"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="Composer.application"
+            name="Composer">
+         <property
+               name="appName"
+               value="Composer">
+         </property>
+      </product>
+   </extension>
 
 </plugin>

@@ -23,8 +23,8 @@ public class DefaultClassReader {
 		//XStream object
 		XStream xstream = new XStream(new DomDriver());
 		
-		nodesFile = new FileInputStream("/Users/toledoalbert/Documents/Desktop Projects/Composer/DefaultNodes.xml");	//TODO
-		transFile = new FileInputStream("/Users/toledoalbert/Documents/Desktop Projects/Composer/DefaultTransitions.xml"); //TODO
+		nodesFile = new FileInputStream("DefaultNodes.xml");	//TODO
+		transFile = new FileInputStream("DefaultTransitions.xml"); //TODO
 		
 		nodes = (ArrayList<NodeClass>) xstream.fromXML(nodesFile);
 		trans = (ArrayList<TransitionClass>) xstream.fromXML(transFile);	
